@@ -1,0 +1,40 @@
+#pragma once
+#include <io.h>
+#include <time.h>
+#include <string.h>
+#include "HiEasyX.h"
+
+#define MAX_LEN 4096	// 字符串缓冲区
+#define DATA_NUM 10000	// 数据文件最大个数
+#define FPS 60
+#define N 1000			//数据个数
+//#include<graphics.h>
+
+#ifdef UNICODE  //设置多字节字符集
+#undef UNICODE
+#endif
+
+//
+// 超参数区
+//
+
+// 窗体大小
+#define ASPECT_RATIO 1.7777777777777778       // 宽高比（16：9）
+#define WINDOW_HEI 720                       // 窗体高度大小
+#define WINDOW_WID WINDOW_HEI*ASPECT_RATIO    // 窗体宽度大小
+
+// 平面设计中的常数
+#define PHI 0.618
+#define EX_LEFT (PHI - 0.5) / 2
+#define MID_LEFT (1 - PHI) / 2
+
+// 字体居中
+#define TOP_LEFT     1
+#define TOP          2
+#define TOP_RIGHT    3
+#define LEFT         4
+#define CENTER       5
+#define RIGHT        6
+#define BOTTOM_LEFT  7
+#define BOTTOM       8
+#define BOTTOM_RIGHT 9
