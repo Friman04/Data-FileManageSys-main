@@ -631,8 +631,7 @@ void home()
 				}
 
 				file_browser.RenderFileBrowser(canvas_main);
-				if（！连续两次遇到这里）
-					REDRAW_WINDOW();
+				REDRAW_WINDOW();
             }
 
 
