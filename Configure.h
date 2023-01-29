@@ -4,24 +4,26 @@
 #include <string.h>
 #include "HiEasyX.h"
 
-#define MAX_LEN 4096	// 字符串缓冲区
-#define DATA_NUM 10000	// 数据文件最大个数
-#define FPS 60
-#define N 1000			//数据个数
-//#include<graphics.h>
-
 #ifdef UNICODE  //设置多字节字符集
 #undef UNICODE
 #endif
+
+#define MAX_LEN 4096							// 字符串缓冲区
+#define DATA_NUM 10000							// 数据文件最大个数
+#define FPS 60									// 帧率
+#define N 1000									// 数据个数
+#define DATA_WIDTH 32							// 数据显示位宽
+//#include<graphics.h>
+
 
 //
 // 超参数区
 //
 
 // 窗体大小
-#define ASPECT_RATIO 1.7777777777777778       // 宽高比（16：9）
-#define WINDOW_HEI 720                       // 窗体高度大小
-#define WINDOW_WID WINDOW_HEI*ASPECT_RATIO    // 窗体宽度大小
+#define ASPECT_RATIO 1.77777777777778			// 宽高比（16：9）
+#define WINDOW_HEI 720							// 窗体高度大小
+#define WINDOW_WID WINDOW_HEI*ASPECT_RATIO		// 窗体宽度大小
 
 // 平面设计中的常数
 #define PHI 0.618

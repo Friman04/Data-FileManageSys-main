@@ -1,5 +1,24 @@
 #include "Core.h"
 
+float mean(float a[], int n) //数据的均值
+{
+    float sum = 0;
+    int i;
+    for (i = 0; i < n; i++)
+        sum = sum + a[i];
+    return sum / n;
+}
+
+float variance(float a[], int n) //数据方差
+{
+    float M, sum = 0;
+    int i;
+    M = mean(a, n);
+    for (i = 0; i < 100; i++)
+        sum = sum + (a[i] - M) * (a[i] - M);
+    return sum / n;
+}
+
 wchar_t* char2wchar(const char* cchar)
 {
     wchar_t* m_wchar;

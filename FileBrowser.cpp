@@ -4,11 +4,13 @@ FileBrowser::FileBrowser()
 {
 }
 
-int FileBrowser::GetDataIndex() { return data_index; }
+unsigned int FileBrowser::GetDataIndex() { return data_index; }
 
-int FileBrowser::GetDataPage() { return data_page; }
+unsigned int FileBrowser::GetDataPage() { return data_page; }
 
-int FileBrowser::GetRowNum() { return row_num; }
+unsigned int FileBrowser::GetRowNum() { return row_num; }
+
+unsigned int FileBrowser::GetTotalPages() { return page_num; }
 
 void FileBrowser::SetDataIndex(int index) { data_index = index; }
 
@@ -32,11 +34,11 @@ bool FileBrowser::IsEndPage()
 		return false;
 }
 
-void FileBrowser::LoadDataFileName()
+void FileBrowser::LoadDataFileName(const char* filename)
 {
 	struct _finddata_t file;
 	intptr_t hFile;
-	hFile = _findfirst("data/*.txt", &file);
+	hFile = _findfirst(filename, &file);
 	if (hFile == -1)
 	{
 		printf("没有找到文件！\n");
@@ -56,6 +58,7 @@ void FileBrowser::LoadDataFileName()
 		if (_findnext(hFile, &file))
 		{
 			data_len = data_index;
+			page_num = data_len / row_num + 1;
 			break;
 		}
 		data_index++;
@@ -108,8 +111,46 @@ int FileBrowser::InWhichButton(ExMessage msg)
 	return -1;
 }
 
-void FileBrowser::DrawButton()
+void FileBrowser::LoadData(ExMessage msg)
 {
+	char filename[MAX_LEN];
+	strcpy(filename, "data/");
+	strcat(filename, data_names[data_page * row_num + InWhichButton(msg)]);
+	FILE* fp;
+	if ((fp = fopen(filename, "r+")) == NULL)
+	{
+		printf("Can not open file\n");
+		exit(0);
+	}
+	for (int i = 0; i < N; i++)
+	{
+		fscanf(fp, "%f", &info.data[i]);
+	}
+	fclose(fp);
+	strcpy(info.filename, data_names[data_page * row_num + InWhichButton(msg)]);
+	info.mean = mean(info.data, N);
+	info.variance = variance(info.data, N);
+}
+
+void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
+{
+	const char* pname = info.filename;
+	char mean[DATA_WIDTH];
+	char mean_suffix[DATA_WIDTH + 10] = "均值为：";
+	sprintf(mean, "%f", info.mean);
+	strcat(mean_suffix, mean);
+	char var[DATA_WIDTH];
+	char var_suffix[DATA_WIDTH + 10] = "方差为：";
+	sprintf(var, "%f", info.variance);
+	strcat(var_suffix, var);
+	const char* pmean = mean_suffix;
+	const char* pvar = var_suffix;
+
+	// 30为底部安全边距
+	canvas.SolidRectangle(WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30);
+	textAlign(canvas, char2wchar(pname), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID *  EX_LEFT - 30, TOP);
+	textAlign(canvas, char2wchar(pmean), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, BOTTOM_LEFT);
+	textAlign(canvas, char2wchar(pvar), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP_LEFT);
 }
 
 FileBrowser::~FileBrowser()

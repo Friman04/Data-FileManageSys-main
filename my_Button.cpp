@@ -1,5 +1,8 @@
 #include "my_Button.h"
 
+/// <summary>
+/// 被注释的方法已被完全弃用，重新启用有危险
+/// </summary>
 my_Button::my_Button()
 {
 
@@ -29,11 +32,11 @@ int my_Button::getHeight() { return h; }
 
 LPCTSTR my_Button::getText() { return text.str; }
 
-hiex::ImageBlock my_Button::getIcon() { return icon; }
-
-hiex::ImageBlock my_Button::getHoveringImage() { return bg_hover; }
-
-hiex::ImageBlock my_Button::getPushingImage() { return bg_push; }
+//hiex::ImageBlock my_Button::getIcon() { return icon; }
+//
+//hiex::ImageBlock my_Button::getHoveringImage() { return bg_hover; }
+//
+//hiex::ImageBlock my_Button::getPushingImage() { return bg_push; }
 
 
 void my_Button::setPos(int x, int y)
@@ -60,10 +63,10 @@ void my_Button::setText(LPCTSTR str)
     this->text.str = str;
 }
 
-void my_Button::setImage(hiex::ImageBlock& img)
-{
-    this->icon = img;
-}
+//void my_Button::setImage(hiex::ImageBlock& img)
+//{
+//    this->icon = img;
+//}
 
 void my_Button::setImage(LPCTSTR str)
 {
@@ -103,53 +106,53 @@ bool my_Button::isLCU(ExMessage msg)
     return false;
 }
 
-void my_Button::createIconCanvas()
-{
-    icon.CreateCanvas(icon_w, icon_h);
-}
-
-void my_Button::createHoverCanvas()
-{
-    bg_hover.CreateCanvas(w, h);
-}
-
-void my_Button::createPushCanvas()
-{
-    bg_push.CreateCanvas(w, h);
-}
-
-
-void my_Button::draw_default_img()
-{
-    // 绘制图标
-    //createIconCanvas();
-    icon.SetPos(icon_pos.x, icon_pos.y);
-    icon.GetCanvas()->Load_Image_Alpha(icon_filename, 0, 0, false, icon_w, icon_h);
-    icon.bUseSrcAlpha = true;
-    //ReverseAlpha(icon.GetCanvas()->GetBuffer(), icon.GetCanvas()->GetBufferSize());
-}
-
-void my_Button::draw_default_txt()
-{
-    // 绘制按钮文本
-    //createIconCanvas();
-    icon.SetPos(icon_pos.x, icon_pos.y);
-    icon.GetCanvas()->OutTextXY(0, 0, text.str, true, text.c);
-    icon.bUseSrcAlpha = true;
-    ReverseAlpha(icon.GetCanvas()->GetBuffer(), icon.GetCanvas()->GetBufferSize());;
-}
-
-void my_Button::draw_hover()
-{
-    // 绘制鼠标覆盖时图标背景
-    //createBgCanvas(bg_hover);
-    bg_hover.SetPos(x, y);
-    bg_hover.GetCanvas()->SetFillColor(hover_c);
-    bg_hover.GetCanvas()->FillRoundRect(x, y, x + w, y + h, round_radius, round_radius);
-    icon.bUseSrcAlpha = true;
-    ReverseAlpha(icon.GetCanvas()->GetBuffer(), icon.GetCanvas()->GetBufferSize());
-
-}
+//void my_Button::createIconCanvas()
+//{
+//    icon.CreateCanvas(icon_w, icon_h);
+//}
+//
+//void my_Button::createHoverCanvas()
+//{
+//    bg_hover.CreateCanvas(w, h);
+//}
+//
+//void my_Button::createPushCanvas()
+//{
+//    bg_push.CreateCanvas(w, h);
+//}
+//
+//
+//void my_Button::draw_default_img()
+//{
+//    // 绘制图标
+//    //createIconCanvas();
+//    icon.SetPos(icon_pos.x, icon_pos.y);
+//    icon.GetCanvas()->Load_Image_Alpha(icon_filename, 0, 0, false, icon_w, icon_h);
+//    icon.bUseSrcAlpha = true;
+//    //ReverseAlpha(icon.GetCanvas()->GetBuffer(), icon.GetCanvas()->GetBufferSize());
+//}
+//
+//void my_Button::draw_default_txt()
+//{
+//    // 绘制按钮文本
+//    //createIconCanvas();
+//    icon.SetPos(icon_pos.x, icon_pos.y);
+//    icon.GetCanvas()->OutTextXY(0, 0, text.str, true, text.c);
+//    icon.bUseSrcAlpha = true;
+//    ReverseAlpha(icon.GetCanvas()->GetBuffer(), icon.GetCanvas()->GetBufferSize());;
+//}
+//
+//void my_Button::draw_hover()
+//{
+//    // 绘制鼠标覆盖时图标背景
+//    //createBgCanvas(bg_hover);
+//    bg_hover.SetPos(x, y);
+//    bg_hover.GetCanvas()->SetFillColor(hover_c);
+//    bg_hover.GetCanvas()->FillRoundRect(x, y, x + w, y + h, round_radius, round_radius);
+//    icon.bUseSrcAlpha = true;
+//    ReverseAlpha(icon.GetCanvas()->GetBuffer(), icon.GetCanvas()->GetBufferSize());
+//
+//}
 
 void my_Button::draw_hover(hiex::Canvas& canvas)
 {
@@ -162,12 +165,12 @@ void my_Button::draw_hover(hiex::Canvas& canvas)
 
 }
 
-void my_Button::draw_push()
-{
-    // 绘制按钮按下时图标背景
-    //createBgCanvas(bg_hover);
-    bg_push.GetCanvas()->SetFillColor(push_c);
-    bg_push.GetCanvas()->FillRoundRect(x, y, x + w, y + h, round_radius, round_radius);
-    icon.bUseSrcAlpha = true;
-    ReverseAlpha(icon.GetCanvas()->GetBuffer(), icon.GetCanvas()->GetBufferSize());
-}
+//void my_Button::draw_push()
+//{
+//    // 绘制按钮按下时图标背景
+//    //createBgCanvas(bg_hover);
+//    bg_push.GetCanvas()->SetFillColor(push_c);
+//    bg_push.GetCanvas()->FillRoundRect(x, y, x + w, y + h, round_radius, round_radius);
+//    icon.bUseSrcAlpha = true;
+//    ReverseAlpha(icon.GetCanvas()->GetBuffer(), icon.GetCanvas()->GetBufferSize());
+//}

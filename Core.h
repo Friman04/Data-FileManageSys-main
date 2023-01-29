@@ -28,16 +28,35 @@ typedef struct Text  ///<-[?]C++20标准中typerdef名称中使用的未命名的类不能声明非
 
 typedef struct
 {
-    char name[MAX_LEN];
+    char filename[MAX_LEN];
     tm create_time;
     tm recent_edited_time;
     float data[N];
-}dataFile;
+    int col;
+    int row;
+    float mean;
+    float variance;
+    char status;
+}dataInfo;
 
 typedef struct
 {
     int x, y;
 }intPair;
+
+/**
+ * @brief 求数据均值
+ * @param[in] a                 一维数组
+ * @param[in] n 	            数组长度
+*/
+float mean(float a[], int n);
+
+/**
+ * @brief 求数据方差
+ * @param[in] a                 一维数组
+ * @param[in] n 	            数组长度
+*/
+float variance(float a[], int n);
 
 /**
  * @brief char转换wchat（注意有内存泄露的风险）
@@ -92,8 +111,8 @@ IMAGE imageAlign_alpha(hiex::Canvas& canvas, LPCTSTR img_file, int iWidth, int i
  * @param[in] esc       		字符串的书写角度（单位0.1°）
  * @param[in] ori         		每个字符的书写角度（单位0.1°）
 */
-void textAlign(hiex::ImageBlock& img, LPCTSTR str, int fHeight, int fWidth, LPCTSTR font, int pivot_x, int pivot_y, int wid, int hei, int align_mode = CENTER, COLORREF c = BLACK, LONG esc = 0L, LONG ori = 0L, int bg = TRANSPARENT);
 void textAlign(hiex::Canvas& canvas, LPCTSTR str, int fHeight, int fWidth, LPCTSTR font, int pivot_x, int pivot_y, int wid, int hei, int align_mode = CENTER, COLORREF c = BLACK, LONG esc = 0L, LONG ori = 0L, int bg = TRANSPARENT);
+void textAlign(hiex::ImageBlock& img, LPCTSTR str, int fHeight, int fWidth, LPCTSTR font, int pivot_x, int pivot_y, int wid, int hei, int align_mode = CENTER, COLORREF c = BLACK, LONG esc = 0L, LONG ori = 0L, int bg = TRANSPARENT);
 
 /**
  * @deprecated 此函数已经过时，可能在未来版本中废弃！
