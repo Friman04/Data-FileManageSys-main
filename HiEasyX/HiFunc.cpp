@@ -86,8 +86,8 @@ void HpSleep(int ms)
 		oldclock = clock();
 	else
 		while (clock() < oldclock)			// 延时
-			Sleep(1);						// 释放 CPU 控制权，降低 CPU 占用率
-//			Sleep(0);						// 更高精度、更高 CPU 占用率
+//			Sleep(1);						// 释放 CPU 控制权，降低 CPU 占用率
+			Sleep(0);						// 更高精度、更高 CPU 占用率
 }
 
 bool IsInRect(int x, int y, RECT rct)

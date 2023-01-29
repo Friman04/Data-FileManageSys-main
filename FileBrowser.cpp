@@ -56,6 +56,7 @@ void FileBrowser::LoadDataFileName()
 		if (_findnext(hFile, &file))
 		{
 			data_len = data_index;
+			page_num = data_len / row_num + 1;
 			break;
 		}
 		data_index++;

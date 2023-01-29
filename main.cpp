@@ -445,7 +445,7 @@ void home()
         // 其它按钮绘制
 
 		imageAlign_alpha(canvas_main, L"sprites/login.png", 32, 32, WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * EX_LEFT / 2, WINDOW_WID * EX_LEFT / 2);
-		imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
+		imageAlign_alpha(canvas_main, L"sprites/last_page_disabled.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
 		imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
 
 
@@ -468,10 +468,10 @@ void home()
         while (1)
         {   
 			count++;
-			char page = (char)file_browser.GetDataPage();
-			const char* pag = &page;
-			canvas_main.OutTextXY(600,600,char2wchar(pag));
 
+			
+			//char* page_txt;
+			//sprintf(page_txt, "%d / %d", file_browser.GetDataPage(), file_browser.GetDataPage());
 
             m_msg = getmessage(EX_MOUSE);
 
@@ -530,9 +530,25 @@ void home()
 						file_browser.SetDataPage(file_browser.GetDataPage() - 1);
 						file_browser.RenderFileBrowser(canvas_main);
 
-						canvas_main.SetFillColor(0xCCCCCC);
-						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
-						imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
+						if (file_browser.IsHomePage())
+						{
+							isLastEnable = false;
+							canvas_main.SetFillColor(WHITE);
+							canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
+							imageAlign_alpha(canvas_main, L"sprites/last_page_disabled.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
+						}
+						else
+						{
+							canvas_main.SetFillColor(0xCCCCCC);
+							canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
+							imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
+						}
+
+						//const char* pag = page;
+						//canvas_main.OutTextXY(WINDOW_WID * EX_LEFT + 100, WINDOW_HEI - 45, char2wchar(pag));
+						canvas_main.SetFillColor(WHITE);
+						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
+						imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
 						REDRAW_WINDOW();
 						break;
 					}
@@ -567,9 +583,22 @@ void home()
 						file_browser.SetDataPage(file_browser.GetDataPage() + 1);
 						file_browser.RenderFileBrowser(canvas_main);
 
-						canvas_main.SetFillColor(0xCCCCCC);
-						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
-						imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
+						if (file_browser.IsEndPage())
+						{
+							isNextEnable = false;
+							canvas_main.SetFillColor(WHITE);
+							canvas_main.SolidRoundRect(WINDOW_WID* EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID* EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
+							imageAlign_alpha(canvas_main, L"sprites/next_page_disabled.png", 32, 32, WINDOW_WID* EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
+						}
+						else
+						{
+							canvas_main.SetFillColor(0xCCCCCC);
+							canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
+							imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
+						}
+						canvas_main.SetFillColor(WHITE);
+						canvas_main.SolidRoundRect(WINDOW_WID* EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID* EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
+						imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID* EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
 						REDRAW_WINDOW();
 						break;
 					}
@@ -619,6 +648,7 @@ void home()
 				/// NextPage
 				if (isNextEnable)
 				{
+					canvas_main.SetFillColor(WHITE);
 					canvas_main.SolidRoundRect(WINDOW_WID* EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID* EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
 					imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID* EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
 				}
@@ -627,7 +657,6 @@ void home()
 					canvas_main.SetFillColor(WHITE);
 					canvas_main.SolidRoundRect(WINDOW_WID* EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID* EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
 					imageAlign_alpha(canvas_main, L"sprites/next_page_disabled.png", 32, 32, WINDOW_WID* EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
-
 				}
 
 				file_browser.RenderFileBrowser(canvas_main);
