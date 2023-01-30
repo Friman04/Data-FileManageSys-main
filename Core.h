@@ -37,6 +37,7 @@ typedef struct
     float mean;
     float variance;
     char status;
+    bool is_valid;
 }dataInfo;
 
 typedef struct

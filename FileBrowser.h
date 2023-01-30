@@ -4,9 +4,9 @@
 
 class FileBrowser
 {
-/// <summary>
-/// 该自定义类中，全部变量变量设为私有，所有get函数获取到的是变量的内容，而非指针。
-/// </summary>
+	/// <summary>
+	/// 该自定义类中，全部变量变量设为私有，所有get函数获取到的是变量的内容，而非指针。
+	/// </summary>
 public:
 	FileBrowser();
 	unsigned int GetDataIndex();

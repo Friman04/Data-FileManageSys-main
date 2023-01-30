@@ -3,9 +3,9 @@
 
 class my_Button
 {
-/// <summary>
-/// 重写底层时被废弃的类，但部分方法仍有用。
-/// </summary>
+    /// <summary>
+    /// 重写底层时被废弃的类，但部分方法仍有用。
+    /// </summary>
 public:
     my_Button();
     my_Button(int _x, int _y, int _w, int _h);

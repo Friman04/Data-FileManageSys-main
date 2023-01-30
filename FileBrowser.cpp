@@ -70,13 +70,13 @@ void FileBrowser::RenderFileBrowser(hiex::Canvas& canvas)
 	canvas.ClearRectangle(WINDOW_WID * EX_LEFT + 1, WINDOW_WID * EX_LEFT, WINDOW_WID * MID_LEFT - 2, WINDOW_HEI - 50);   ///注意在其他分辨率下此处安全边距的设置
 	canvas.SetTextStyle(txt_height, txt_width, L"微软雅黑");  //文件资源管理器（文字及按钮绘制）
 	canvas.SetBkMode(TRANSPARENT);
-	canvas.SetTextColor(BLACK); 
+	canvas.SetTextColor(BLACK);
 	int x = WINDOW_WID * EX_LEFT + 10, y = WINDOW_WID * EX_LEFT + 40;		///<-10和40为安全边距
 	data_index = data_page * row_num;
 	while (true)
 	{
 		if (strlen(data_names[data_index]) > max_len)
-		{	
+		{
 			strncpy(buf2, data_names[data_index], max_len);
 			buf2[max_len - 2] = '\0';
 			strcat(buf2, suffix);
@@ -90,7 +90,7 @@ void FileBrowser::RenderFileBrowser(hiex::Canvas& canvas)
 		}
 		canvas.Line(x - 10, y - (data_btn_height - txt_height) / 2, WINDOW_WID * MID_LEFT, y - (data_btn_height - txt_height) / 2);
 		canvas.Line(x - 10, y + (data_btn_height + txt_height) / 2, WINDOW_WID * MID_LEFT, y + (data_btn_height + txt_height) / 2);
-		file_buttons[data_index](x - 10, y - (data_btn_height - txt_height) / 2, WINDOW_WID * (MID_LEFT - EX_LEFT), data_btn_height);
+		file_buttons[data_index](x - 10, y - (data_btn_height - txt_height) / 2, WINDOW_WID* (MID_LEFT - EX_LEFT), data_btn_height);
 		if (y >= WINDOW_HEI - 100 || data_index >= data_len)		///<-100为安全边距
 		{
 			break;
@@ -148,7 +148,7 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 
 	// 30为底部安全边距
 	canvas.SolidRectangle(WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30);
-	textAlign(canvas, char2wchar(pname), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID *  EX_LEFT - 30, TOP);
+	textAlign(canvas, char2wchar(pname), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP);
 	textAlign(canvas, char2wchar(pmean), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, BOTTOM_LEFT);
 	textAlign(canvas, char2wchar(pvar), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP_LEFT);
 }
