@@ -71,6 +71,7 @@ void FileBrowser::RenderFileBrowser(hiex::Canvas& canvas)
 	canvas.SetTextStyle(txt_height, txt_width, L"微软雅黑");  //文件资源管理器（文字及按钮绘制）
 	canvas.SetBkMode(TRANSPARENT);
 	canvas.SetTextColor(BLACK);
+	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);
 	int x = WINDOW_WID * EX_LEFT + 10, y = WINDOW_WID * EX_LEFT + 40;		///<-10和40为安全边距
 	data_index = data_page * row_num;
 	while (true)
@@ -124,12 +125,19 @@ void FileBrowser::LoadData(ExMessage msg)
 	}
 	for (int i = 0; i < N; i++)
 	{
-		fscanf(fp, "%f", &info.data[i]);
+		if (fscanf(fp, "%f", &info.data[i]) == EOF)
+		{
+			info.count = i;
+			break;
+		}
 	}
 	fclose(fp);
 	strcpy(info.filename, data_names[data_page * row_num + InWhichButton(msg)]);
-	info.mean = mean(info.data, N);
-	info.variance = variance(info.data, N);
+	info.mean = mean(info.data, info.count);
+	info.variance = variance(info.data, info.count);
+	info.max = arraymax(info.data, info.count);
+	info.min = arraymin(info.data, info.count);
+	info.scale = info.max - info.min;
 }
 
 void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
@@ -146,11 +154,32 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	const char* pmean = mean_suffix;
 	const char* pvar = var_suffix;
 
-	// 30为底部安全边距
-	canvas.SolidRectangle(WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30);
+
+	float x1 = WINDOW_WID * MID_LEFT + 50;			// 左上角x坐标
+	int y1 = WINDOW_WID * EX_LEFT + 50;			// 左上角y坐标
+	int x2 = WINDOW_WID - 50;						// 右下角x坐标
+	int y2 = WINDOW_HEI - 50;						// 右下角y坐标
+	const float xval = (x2 - x1) / info.count;		// 每两点间的横坐标之差
+	const float hratio = (y2 - y1) / info.scale;	// 高度拉伸的比例
+	canvas.SolidRectangle(WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, RGB(204, 204, 204));	// 30为底部安全边距
 	textAlign(canvas, char2wchar(pname), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP);
 	textAlign(canvas, char2wchar(pmean), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, BOTTOM_LEFT);
 	textAlign(canvas, char2wchar(pvar), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP_LEFT);
+	canvas.SetLineColor(BLUE);
+	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);
+
+	float x0 = x1;
+	for (int i = 0; i < info.count - 1; i++)
+	{
+		canvas.Line(x0, y1 + (info.max - info.data[i]) * hratio, x0 + xval, y1 + (info.max - info.data[i + 1]) * hratio);
+		x0 += xval;
+	}
+	// 均值
+	canvas.SetLineColor(YELLOW);
+	canvas.SetLineStyle(PS_DASH | PS_JOIN_BEVEL, 3);
+
+	canvas.Line(x1, y1 + (info.max - info.mean) * hratio, x2, y1 + (info.max - info.mean) * hratio);
+
 }
 
 FileBrowser::~FileBrowser()

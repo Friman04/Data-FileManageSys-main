@@ -32,10 +32,14 @@ typedef struct
     tm create_time;
     tm recent_edited_time;
     float data[N];
+    int count;
     int col;
     int row;
     float mean;
     float variance;
+    float max;
+    float min;
+    float scale;
     char status;
     bool is_valid;
 }dataInfo;
@@ -44,6 +48,19 @@ typedef struct
 {
     int x, y;
 }intPair;
+
+
+void arraycopy(float destination[], float source[], int n); //数组拷贝
+void arraysub(float x[], float y[], float z[], int n);// z=x-y;
+float arraymax(float a[], int n); //数组最大值
+float arraymin(float a[], int n); //数组最小值
+float arrayscale(float a[], int n); // 数组的数值范围
+
+
+
+
+
+
 
 /**
  * @brief 求数据均值

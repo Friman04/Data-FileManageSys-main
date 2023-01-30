@@ -11,7 +11,7 @@
 #define MAX_LEN 4096							// 字符串缓冲区
 #define DATA_NUM 10000							// 数据文件最大个数
 #define FPS 60									// 帧率
-#define N 1000									// 数据个数
+#define N INT16_MAX								// 数据最长个数
 #define DATA_WIDTH 32							// 数据显示位宽
 //#include<graphics.h>
 
