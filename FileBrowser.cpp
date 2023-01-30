@@ -144,11 +144,11 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 {
 	const char* pname = info.filename;
 	char mean[DATA_WIDTH];
-	char mean_suffix[DATA_WIDTH + 10] = "均值为：";
+	char mean_suffix[DATA_WIDTH + 10] = "均值：";
 	sprintf(mean, "%f", info.mean);
 	strcat(mean_suffix, mean);
 	char var[DATA_WIDTH];
-	char var_suffix[DATA_WIDTH + 10] = "方差为：";
+	char var_suffix[DATA_WIDTH + 10] = "方差：";
 	sprintf(var, "%f", info.variance);
 	strcat(var_suffix, var);
 	const char* pmean = mean_suffix;
@@ -161,7 +161,7 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	int y2 = WINDOW_HEI - 50;						// 右下角y坐标
 	const float xval = (x2 - x1) / info.count;		// 每两点间的横坐标之差
 	const float hratio = (y2 - y1) / info.scale;	// 高度拉伸的比例
-	canvas.SolidRectangle(WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, RGB(204, 204, 204));	// 30为底部安全边距
+	canvas.SolidRectangle(WINDOW_WID * MID_LEFT + 2, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, RGB(204, 204, 204));	// 30为底部安全边距
 	textAlign(canvas, char2wchar(pname), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP);
 	textAlign(canvas, char2wchar(pmean), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, BOTTOM_LEFT);
 	textAlign(canvas, char2wchar(pvar), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP_LEFT);

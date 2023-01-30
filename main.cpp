@@ -5,7 +5,7 @@
  * @site		https://github.com/Friman04/Data-FileManageSys-main
  * @date		2023.01.12
  * @envir		Windows 11 dev_Build 25272.rs_prerelease.221216-1237 | Visual Studio 2022 | EasyX_20220901 | HiEasyX Ver 0.3.0
- * @version     0.1Beta2a
+ * @version     0.1Beta2b
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
@@ -28,7 +28,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define _SYS_VER_STR_	L"Ver 0.1Beta2a"
+#define _SYS_VER_STR_	L"Ver 0.1Beta2b"
 
 #include "my_Button.h"
 #include "FileBrowser.h"
@@ -431,7 +431,7 @@ void home()
 		canvas_main.SolidRectangle(0, 0, WINDOW_WID * EX_LEFT, WINDOW_HEI); // 左侧深蓝色背景
 		canvas_main.SetFillColor(0xEFE1CF);
 		canvas_main.SolidRectangle(0, 0, WINDOW_WID, WINDOW_WID * EX_LEFT); // 顶侧浅蓝色背景
-		canvas_main.SolidRectangle(WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, RGB(204, 204, 204));	// 数据绘图区背景，30为底部安全边距
+		canvas_main.SolidRectangle(WINDOW_WID * MID_LEFT + 2, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, RGB(204, 204, 204));	// 数据绘图区背景，30为底部安全边距
 
 		//logo
 		canvas_main.Load_Image_Alpha(L"sprites/logo_light.png", 0, 0, false, WINDOW_WID * EX_LEFT - 1, WINDOW_WID * EX_LEFT - 1, 255U, true);

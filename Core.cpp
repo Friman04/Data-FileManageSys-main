@@ -57,8 +57,8 @@ float variance(float a[], int n) //Êý¾Ý·½²î
     float M, sum = 0;
     int i;
     M = mean(a, n);
-    for (i = 0; i < 100; i++)
-        sum = sum + (a[i] - M) * (a[i] - M);
+    for (i = 0; i < n; i++)
+        sum += (a[i] - M) * (a[i] - M);
     return sum / n;
 }
 
