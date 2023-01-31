@@ -34,6 +34,7 @@ void FileBrowser::SetDataInfoDrawingArea(int x1, int y1, int x2, int y2)
 
 void FileBrowser::FlushDataIndex() { data_index = 0; }
 
+
 void FileBrowser::ClearDataDrawingZone(hiex::Canvas& canvas)
 {
 	canvas.SolidRectangle(WINDOW_WID * MID_LEFT + 2, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, 0xDDDDDD);	// 30为底部安全边距
@@ -49,7 +50,7 @@ bool FileBrowser::IsHomePage()
 
 bool FileBrowser::IsEndPage()
 {
-	if (data_page == data_index / row_num)
+	if (data_page == page_num - 1)
 		return true;
 	else
 		return false;
@@ -78,8 +79,9 @@ void FileBrowser::LoadDataFileName(const char* filename)
 		data_names[data_index] = data;
 		if (_findnext(hFile, &file))
 		{
-			data_len = data_index;
+			data_len = data_index + 1;
 			page_num = data_len / row_num + 1;
+			last_page_row_num = data_len - (page_num - 1) * row_num;
 			break;
 		}
 		data_index++;
@@ -114,7 +116,7 @@ void FileBrowser::RenderFileBrowser(hiex::Canvas& canvas)
 		canvas.Line(x - 10, y - (data_btn_height - txt_height) / 2, WINDOW_WID * MID_LEFT, y - (data_btn_height - txt_height) / 2);
 		canvas.Line(x - 10, y + (data_btn_height + txt_height) / 2, WINDOW_WID * MID_LEFT, y + (data_btn_height + txt_height) / 2);
 		file_buttons[data_index](x - 10, y - (data_btn_height - txt_height) / 2, WINDOW_WID* (MID_LEFT - EX_LEFT), data_btn_height);
-		if (y >= WINDOW_HEI - 100 || data_index >= data_len)		///<-100为安全边距
+		if (y >= WINDOW_HEI - 100 || data_index >= data_len - 1)		///<-100为安全边距
 		{
 			break;
 		}
@@ -126,10 +128,21 @@ void FileBrowser::RenderFileBrowser(hiex::Canvas& canvas)
 
 int FileBrowser::InWhichButton(ExMessage msg)
 {
-	for (int i = 0; i <= row_num; i++)
+	if (!IsEndPage())
 	{
-		if (file_buttons[i].isIn(msg))
-			return i;
+		for (int i = 0; i < row_num; i++)
+		{
+			if (file_buttons[i].isIn(msg))
+				return i;
+		}
+	}
+	else
+	{
+		for (int i = 0; i < last_page_row_num; i++)
+		{
+			if (file_buttons[i].isIn(msg))
+				return i;
+		}
 	}
 	return -1;
 }
@@ -176,7 +189,7 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	const char* pmean = mean_suffix;
 	const char* pvar = var_suffix;
 
-	SetLineChartDrawingArea(WINDOW_WID * MID_LEFT + 250, WINDOW_WID * EX_LEFT + 100, WINDOW_WID - 100, WINDOW_HEI - 100);
+	SetLineChartDrawingArea(WINDOW_WID * MID_LEFT + 300, WINDOW_WID * EX_LEFT + 100, WINDOW_WID - 120, WINDOW_HEI - 150);
 
 	float x1 = line_chart.point1.x;					// 左上角x坐标
 	int y1 = line_chart.point1.y;					// 左上角y坐标
@@ -188,8 +201,14 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	ClearDataDrawingZone(canvas);	// 清除整个绘画区域
 
 	// 绘制坐标轴
-	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);
-
+	const int margin = 30;
+	const int extent = 20;
+	canvas.SetLineStyle(PS_SOLID | PS_JOIN_ROUND, 3);
+	canvas.Line(x1 - margin, y1 - margin - extent, x1 - margin, y2 + margin, true, BLACK);	// y轴
+	canvas.Line(x1 - margin, y2 + margin, x2 + margin + extent, y2 + margin, true, BLACK);	// x轴
+	imageAlign_alpha(canvas, L"sprites/next_page.png", 25, 25, x2 + margin + extent - 2, y2 + margin, 0, 0);
+	imageAlign_alpha(canvas, L"sprites/up_arrow.png", 25, 25, x1 - margin, y1 - margin - extent + 2, 0, 0);
+	//canvas.Draw_Text();
 
 
 

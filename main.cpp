@@ -5,7 +5,7 @@
  * @site		https://github.com/Friman04/Data-FileManageSys-main
  * @date		2023.01.12
  * @envir		Windows 11 dev_Build 25272.rs_prerelease.221216-1237 | Visual Studio 2022 | EasyX_20220901 | HiEasyX Ver 0.3.0
- * @version     0.1Beta3a
+ * @version     0.1Beta3b
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
@@ -28,7 +28,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define _SYS_VER_STR_	L"Ver 0.1Beta3a"
+#define _SYS_VER_STR_	L"Ver 0.1Beta3b"
 
 #include "my_Button.h"
 #include "FileBrowser.h"
@@ -478,6 +478,7 @@ void home()
 
 			m_msg = getmessage(EX_MOUSE);
 
+			my_Button btn;
 
 			if (m_msg.x > WINDOW_WID * (1 - EX_LEFT * 3 / 4) && m_msg.y > WINDOW_WID * EX_LEFT / 4 && m_msg.x < WINDOW_WID * (1 - EX_LEFT / 4) && m_msg.y < WINDOW_WID * EX_LEFT * 3 / 4) // 如果鼠标在这个区间内
 			{
@@ -629,22 +630,25 @@ void home()
 
 			else if (m_msg.x > WINDOW_WID * EX_LEFT && m_msg.y > WINDOW_WID * EX_LEFT && m_msg.x < WINDOW_WID * MID_LEFT && m_msg.y < WINDOW_HEI - 45)
 			{
-				my_Button btn = file_browser.file_buttons[file_browser.InWhichButton(m_msg)];
-				file_browser.RenderFileBrowser(canvas_main);
-				btn.draw_hover(canvas_main);
-				if (btn.isIn(m_msg))
+				int btn_index = file_browser.InWhichButton(m_msg);
+				if (btn_index != -1) 
 				{
-					if (btn.isLCD(m_msg))
+					btn = file_browser.file_buttons[btn_index];
+					file_browser.RenderFileBrowser(canvas_main);
+					btn.draw_hover(canvas_main);
+					if (btn.isIn(m_msg))
 					{
+						if (btn.isLCD(m_msg))
+						{
 
+						}
+						else if (btn.isLCU(m_msg))
+						{
+							file_browser.LoadData(m_msg);
+							file_browser.DrawDataInfo(canvas_main);
+							REDRAW_WINDOW();
+						}
 					}
-					else if (btn.isLCU(m_msg))
-					{
-						file_browser.LoadData(m_msg);
-						file_browser.DrawDataInfo(canvas_main);
-						REDRAW_WINDOW();
-					}
-
 				}
 			}
 

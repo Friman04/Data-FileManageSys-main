@@ -38,13 +38,14 @@ public:
 	static const unsigned short data_btn_height = 40;		///<-数据文件按钮显示的高度
 
 private:
-	static const unsigned int row_num = (WINDOW_HEI * (1 - EX_LEFT) - 140) / data_btn_height;		///<-每页可显示的行数，140为安全边距
+	static const unsigned int row_num = (WINDOW_HEI * (1 - EX_LEFT) - 140) / data_btn_height + 1;		///<-每页可显示的行数，140为安全边距
 	bool isStartToLoad = true;																		///<-是否开始加载
 	static const int max_len = (WINDOW_WID * (MID_LEFT - EX_LEFT) - 30) / txt_width;				///<-每行可显示的字数，30为安全边距（仍有设计上的bug）
-	unsigned int data_page = 0;																		///<-当前页数
+	unsigned int data_page = 0;																		///<-当前页数索引
 	unsigned int data_index = data_page * row_num;													///<-当前数据文件的索引
 	unsigned int data_len;																			///<-文件总个数
 	unsigned int page_num;																			///<-总页数
+	unsigned int last_page_row_num;																	///<-最后一页的行数
 	dataInfo info;																					///<-数据信息
 	squaredArea line_chart;																			///<-绘制折线图的区域
 	squaredArea data_info;																			///<-绘制数据文件信息的区域
