@@ -22,7 +22,6 @@ public:
 	void FlushDataIndex();
 
 	void ClearDataDrawingZone(hiex::Canvas& canvas);
-
 	void LoadDataFileName(const char* filename);
 	void RenderFileBrowser(hiex::Canvas& canvas);
 	int InWhichButton(ExMessage msg);

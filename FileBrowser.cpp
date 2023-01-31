@@ -177,19 +177,43 @@ void FileBrowser::LoadData(ExMessage msg)
 
 void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 {
-	const char* pname = info.filename;
+	/*绘图常数*/
+	const int margin = 30;				// 与折线图的边距
+	const int extension = 20;			// 坐标轴正半轴延伸长度
+	const int interval = 50;			// 标记线间距
+	const int mark_len = 5;				// 标记线长度
+	const int info_margin = 10;			// 信息到信息框的边距
+	const int info_margin_top = 5;		// 信息到文件名的边距
+	const int info_txt_height = 24;		// 信息文字大小
+	const float txt_line_space = 1.25;	// 行间距（倍数）
+	SetLineChartDrawingArea(WINDOW_WID * MID_LEFT + 350, WINDOW_WID * EX_LEFT + 100, WINDOW_WID - 100, WINDOW_HEI - 150);
+	SetDataInfoDrawingArea(WINDOW_WID * MID_LEFT + 50, WINDOW_WID * EX_LEFT + 100 - margin - extension, WINDOW_WID * MID_LEFT + 250, WINDOW_WID * EX_LEFT + 400);
+
 	char mean[DATA_WIDTH];
 	char mean_suffix[DATA_WIDTH + 10] = "均值：\n";
 	sprintf(mean, "%f", info.mean);
 	strcat(mean_suffix, mean);
+
 	char var[DATA_WIDTH];
 	char var_suffix[DATA_WIDTH + 10] = "方差：\n";
 	sprintf(var, "%f", info.variance);
 	strcat(var_suffix, var);
+
+	char max[DATA_WIDTH];
+	char max_suffix[DATA_WIDTH + 10] = "最大值：\n";
+	sprintf(max, "%f", info.max);
+	strcat(max_suffix, max);
+
+	char min[DATA_WIDTH];
+	char min_suffix[DATA_WIDTH + 10] = "最小值：\n";
+	sprintf(min, "%f", info.min);
+	strcat(min_suffix, min);
+
+	const char* pname = info.filename;
 	const char* pmean = mean_suffix;
 	const char* pvar = var_suffix;
-
-	SetLineChartDrawingArea(WINDOW_WID * MID_LEFT + 300, WINDOW_WID * EX_LEFT + 100, WINDOW_WID - 120, WINDOW_HEI - 150);
+	const char* pmax = max_suffix;
+	const char* pmin = min_suffix;
 
 	float x1 = line_chart.point1.x;					// 左上角x坐标
 	int y1 = line_chart.point1.y;					// 左上角y坐标
@@ -200,18 +224,87 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	const float hratio = (y2 - y1) / info.scale;	// 高度拉伸的比例
 	ClearDataDrawingZone(canvas);	// 清除整个绘画区域
 
+	// 绘制数据信息
+	canvas.FillRoundRect(data_info.point1.x, data_info.point1.y, data_info.point2.x, data_info.point2.y, 30, 30, true, 0x999999, RGB(200, 215, 230));
+
+	//* 其实这段代码可以优化成
+	//* 需要展示的信息放在一个队列里，用for遍历这个队列然后绘制出来
+	textAlign
+		(canvas,
+		char2wchar(pname),
+		info_txt_height,
+		0,
+		L"黑体",
+		data_info.point1.x + info_margin, 
+		data_info.point1.y + info_margin,
+		data_info.point2.x - data_info.point1.x - 2 * info_margin, 
+		data_info.point2.y - data_info.point1.y - 2 * info_margin, 
+		TOP);
+	textAlign
+		(canvas,
+		char2wchar(pmean),
+		info_txt_height,
+		0,
+		L"微软雅黑",
+		data_info.point1.x + info_margin,
+		data_info.point1.y + info_margin + info_txt_height * txt_line_space + info_margin_top,
+		data_info.point2.x - data_info.point1.x - 2 * info_margin,
+		data_info.point2.y - data_info.point1.y - 2 * info_margin - info_txt_height * txt_line_space,
+		TOP_LEFT);
+	textAlign
+		(canvas,
+		char2wchar(pvar),
+		info_txt_height,
+		0,
+		L"微软雅黑",
+		data_info.point1.x + info_margin,
+		data_info.point1.y + info_margin + 2 * info_txt_height * txt_line_space + info_margin_top,
+		data_info.point2.x - data_info.point1.x - 2 * info_margin,
+		data_info.point2.y - data_info.point1.y - 2 * info_margin - 2 * info_txt_height * txt_line_space,
+		TOP_LEFT);
+	textAlign
+		(canvas,
+		char2wchar(pmax),
+		info_txt_height,
+		0,
+		L"微软雅黑",
+		data_info.point1.x + info_margin,
+		data_info.point1.y + info_margin + 3 * info_txt_height * txt_line_space + info_margin_top,
+		data_info.point2.x - data_info.point1.x - 2 * info_margin,
+		data_info.point2.y - data_info.point1.y - 2 * info_margin - 3 * info_txt_height * txt_line_space,
+		TOP_LEFT);
+	textAlign
+		(canvas,
+		char2wchar(pmin),
+		info_txt_height,
+		0,
+		L"微软雅黑",
+		data_info.point1.x + info_margin,
+		data_info.point1.y + info_margin + 4 * info_txt_height * txt_line_space + info_margin_top,
+		data_info.point2.x - data_info.point1.x - 2 * info_margin,
+		data_info.point2.y - data_info.point1.y - 2 * info_margin - 4 * info_txt_height * txt_line_space,
+		TOP_LEFT);
+
+
 	// 绘制坐标轴
-	const int margin = 30;
-	const int extent = 20;
 	canvas.SetLineStyle(PS_SOLID | PS_JOIN_ROUND, 3);
-	canvas.Line(x1 - margin, y1 - margin - extent, x1 - margin, y2 + margin, true, BLACK);	// y轴
-	canvas.Line(x1 - margin, y2 + margin, x2 + margin + extent, y2 + margin, true, BLACK);	// x轴
-	imageAlign_alpha(canvas, L"sprites/next_page.png", 25, 25, x2 + margin + extent - 2, y2 + margin, 0, 0);
-	imageAlign_alpha(canvas, L"sprites/up_arrow.png", 25, 25, x1 - margin, y1 - margin - extent + 2, 0, 0);
-	//canvas.Draw_Text();
+	canvas.Line(x1 - margin, y1 - margin - extension, x1 - margin, y2 + margin, true, BLACK);	// y轴
+	canvas.Line(x1 - margin, y2 + margin, x2 + margin + extension, y2 + margin, true, BLACK);	// x轴
+	imageAlign_alpha(canvas, L"sprites/next_page.png", 25, 25, x2 + margin + extension - 2, y2 + margin, 0, 0);
+	imageAlign_alpha(canvas, L"sprites/up_arrow.png", 25, 25, x1 - margin, y1 - margin - extension + 2, 0, 0);
 
-
-
+	for (int i = x1; i < x2 + margin + extension; i += interval)
+	{	// x轴
+		canvas.Line(i, y2 + margin, i, y2 + margin - mark_len);
+	}
+	float y = info.min;
+	for (int i = y2; i > y1 - margin - extension; i -= interval, y += interval / hratio)
+	{	// y轴
+		canvas.Line(x1 - margin, i, x1 - margin + mark_len, i);
+		char buffer[DATA_WIDTH];
+		sprintf(buffer, "%.2f", y);
+		textAlign(canvas, char2wchar(buffer), 22, 0, L"微软雅黑", x1 - margin - 5, i, 0, 0, RIGHT);
+	}
 
 	// 绘制折线图
 	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);	
@@ -227,11 +320,11 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	canvas.SetLineStyle(PS_DASH | PS_JOIN_BEVEL, 3);
 	canvas.Line(x1, y1 + (info.max - info.mean) * hratio, x2, y1 + (info.max - info.mean) * hratio);
 
+	// 按钮
+	//my_Button filter(WINDOW_WID * MID_LEFT, 500, 100, 30);
 
-	textAlign(canvas, char2wchar(pname), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP);
-	textAlign(canvas, char2wchar(pmean), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, BOTTOM_LEFT);
-	textAlign(canvas, char2wchar(pvar), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP_LEFT);
-	//canvas.Draw_Text();
+
+
 }
 
 FileBrowser::~FileBrowser()

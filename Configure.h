@@ -2,6 +2,7 @@
 #include <io.h>
 #include <time.h>
 #include <string.h>
+#include <queue>
 #include "HiEasyX.h"
 
 #ifdef UNICODE  //设置多字节字符集

@@ -2,6 +2,7 @@
 #include "Configure.h"
 
 
+/*结构体*/
 
 typedef struct
 {
@@ -32,6 +33,7 @@ typedef struct
     tm create_time;
     tm recent_edited_time;
     float data[N];
+    float processed_data[N];
     int count;
     int col;
     int row;
@@ -55,17 +57,49 @@ typedef struct
     intPair point2;     ///<- 右下角点
 }squaredArea;
 
-void arraycopy(float destination[], float source[], int n); //数组拷贝
-void arraysub(float x[], float y[], float z[], int n);// z=x-y;
-float arraymax(float a[], int n); //数组最大值
-float arraymin(float a[], int n); //数组最小值
-float arrayscale(float a[], int n); // 数组的数值范围
+
+/*数组处理方法*/
+
+/**
+ * @brief 拷贝数组
+ * @param[in] destination       目标数组
+ * @param[in] source            源数组
+ * @param[in] n 	            数组长度
+*/
+void arraycopy(float destination[], float source[], int n);
+
+/**
+ * @brief 数组相减
+ * @param[in] x                 被减数组
+ * @param[in] y                 减数组
+ * @param[in] z 	            差数组
+ * @param[in] n 	            数组长度
+*/
+void arraysub(float x[], float y[], float z[], int n);
+
+/**
+ * @brief 求数组最大值
+ * @param[in] a                 一维数组
+ * @param[in] n 	            数组长度
+*/
+float arraymax(float a[], int n);
+
+/**
+ * @brief 求数组最小值
+ * @param[in] a                 一维数组
+ * @param[in] n 	            数组长度
+*/
+float arraymin(float a[], int n);
+
+/**
+ * @brief 求数组范围
+ * @param[in] a                 一维数组
+ * @param[in] n 	            数组长度
+*/
+float arrayscale(float a[], int n);
 
 
-
-
-
-
+/*数据统计方法*/
 
 /**
  * @brief 求数据均值
@@ -81,12 +115,24 @@ float mean(float a[], int n);
 */
 float variance(float a[], int n);
 
+
+/*数据分析方法*/
 /**
- * @brief char转换wchat（注意有内存泄露的风险）
- * @param[in] cchar	            char字符串
- * @return                      wchar字符串
+ * @brief 均值滤波
+ * @param[in] destination       一维目标数组
+ * @param[in] source            一维源数组
+ * @param[in] n 	            数组长度
+ * @param[in] kernel_size       窗口大小（必须为奇数）
 */
-wchar_t* char2wchar(const char* cchar);
+float mean_filter(float destination[], float a[], int n, int kernel_size);
+
+
+
+
+
+
+
+/*对齐绘制方法*/
 
 /**
  * @brief 计算对齐坐标
@@ -167,3 +213,14 @@ void __TextAlign(hiex::Canvas& canvas, LPCTSTR str, int fHeight, int fWidth, LPC
  * @param[in] vertical  		是否垂直居中（默认是）
 */
 void __textAlign(LPCTSTR str, int x, int y, int width, int height, bool horizontal = true, bool vertical = true, int mode = TRANSPARENT);
+
+
+/*其它*/
+
+/**
+ * @brief char转换wchat（注意有内存泄露的风险）
+ * @param[in] cchar	            char字符串
+ * @return                      wchar字符串
+*/
+wchar_t* char2wchar(const char* cchar);
+

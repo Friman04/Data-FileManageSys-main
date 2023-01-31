@@ -62,14 +62,29 @@ float variance(float a[], int n) //数据方差
     return sum / n;
 }
 
-wchar_t* char2wchar(const char* cchar)
+float mean_filter(float destination[], float a[], int n, int kernel_size)
 {
-    wchar_t* m_wchar;
-    int len = MultiByteToWideChar(CP_ACP, 0, cchar, strlen(cchar), NULL, 0);
-    m_wchar = new wchar_t[len + 1];
-    MultiByteToWideChar(CP_ACP, 0, cchar, strlen(cchar), m_wchar, len);
-    m_wchar[len] = '\0';
-    return m_wchar;
+    if (kernel_size % 2 == 0 || kernel_size > n)
+        return -1;
+    else
+    {
+        std::queue <float>window;
+        for (int i = 0; i < n; i++)     // 遍历整个数据
+        {
+            window.push(a[i]);
+            float sum = 0;
+            for (int j = 0; j < window.size(); j++)     // 遍历滑窗
+            {   //* 疏忽了，忘记C++里面没有遍历queue的方法，这个遍历的方法也太蠢了，一点都不优雅
+                sum += window.front();
+                window.push(window.front());
+                window.pop();
+            }
+            destination[i] = sum / window.size();
+            if (window.size() >= kernel_size)
+                window.pop();
+        }
+    }
+
 }
 
 intPair align(int x, int y, int w, int h, int wid, int hei, int align_mode)
@@ -299,4 +314,14 @@ void __textAlign(LPCTSTR str, int x, int y, int width, int height, bool horizont
     if (vertical)
         y += (height - textHeight) / 2;
     outtextxy(x, y, str);
+}
+
+wchar_t* char2wchar(const char* cchar)
+{
+    wchar_t* m_wchar;
+    int len = MultiByteToWideChar(CP_ACP, 0, cchar, strlen(cchar), NULL, 0);
+    m_wchar = new wchar_t[len + 1];
+    MultiByteToWideChar(CP_ACP, 0, cchar, strlen(cchar), m_wchar, len);
+    m_wchar[len] = '\0';
+    return m_wchar;
 }

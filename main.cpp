@@ -5,7 +5,7 @@
  * @site		https://github.com/Friman04/Data-FileManageSys-main
  * @date		2023.01.12
  * @envir		Windows 11 dev_Build 25272.rs_prerelease.221216-1237 | Visual Studio 2022 | EasyX_20220901 | HiEasyX Ver 0.3.0
- * @version     0.1Beta3b
+ * @version     0.1Beta3d
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
@@ -24,11 +24,17 @@
  *				2.【严重】【已解决】[2023-01-26]使用HiEasyX提供的Canvas扩展ImageBlock、Layer、Scene下的Render()和Redraw()方法导致处理鼠标消息过慢
  *					[可能的原因]未知。
  *					[可行的解决方案]重写底层，不使用Canvas扩展。
+ * 
+ * @bug			1.文件浏览器第二页无法使用
+ * @bug			2.性能问题
+ * @bug			3.在选择文件时偶见文件浏览器的行分隔线渲染为和均值线一样的黄色
+ * @bug			4.偶见的系统崩溃
+ * @bug			5.文件资源管理器中文件名若存在非英语字符可能会使得末尾显示过短或过长
  *******************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define _SYS_VER_STR_	L"Ver 0.1Beta3b"
+#define _SYS_VER_STR_	L"Ver 0.1Beta3d"
 
 #include "my_Button.h"
 #include "FileBrowser.h"
@@ -761,7 +767,6 @@ int main()
 {
 
 	home();
-
 
 	getchar();
 	return 0;
