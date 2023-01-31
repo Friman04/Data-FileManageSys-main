@@ -125,11 +125,6 @@ float variance(float a[], int n);
 float mean_filter(float destination[], float a[], int n, int kernel_size);
 
 
-
-
-
-
-
 /*对齐绘制方法*/
 
 /**

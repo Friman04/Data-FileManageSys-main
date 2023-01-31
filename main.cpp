@@ -5,10 +5,11 @@
  * @site		https://github.com/Friman04/Data-FileManageSys-main
  * @date		2023.01.12
  * @envir		Windows 11 dev_Build 25272.rs_prerelease.221216-1237 | Visual Studio 2022 | EasyX_20220901 | HiEasyX Ver 0.3.0
- * @version     0.1Beta4
+ * @version     0.1Beta4b
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
+ *				本程序可能需要足够的CPU单核性能和GPU性能，若出现轻微卡顿和延迟渲染现象为正常
  *
  * @note		写代码的时候 Windows Defence 报出疑似病毒，笑死了
  * @note		目前已知存在的bug（更多已修复bug可移步更新日志）
@@ -27,14 +28,19 @@
  * 
  * @bug			1.文件浏览器第二页无法使用
  * @bug			2.性能问题
- * @bug			3.在选择文件时偶见文件浏览器的行分隔线渲染为和均值线一样的黄色
  * @bug			4.偶见的系统崩溃
  * @bug			5.文件资源管理器中文件名若存在非英语字符可能会使得末尾显示过短或过长
+ * 
+ * @bug			6.滤波方法导致数据偏移
+ * 
+ * @develop		1.登录系统
+ * @develop		2.切换按钮
+ * @develop		3.去除离群值
  *******************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define _SYS_VER_STR_	L"Ver 0.1Beta4"
+#define _SYS_VER_STR_	L"Ver 0.1Beta4b"
 
 #include "my_Button.h"
 #include "FileBrowser.h"
@@ -655,19 +661,31 @@ void home()
 					}
 				}
 			}
-			else if (file_browser.filter[1].isIn(m_msg))
+			else if (file_browser.IsInFuncArea(m_msg))
 			{
-				file_browser.filter[1].draw_detailed_hover(canvas_main);
-				REDRAW_WINDOW();
-				if (file_browser.filter[1].isLCD(m_msg))
+
+				if (file_browser.filters[1].isIn(m_msg))
 				{
-					file_browser.filter[1].draw_detailed_push(canvas_main);
+					file_browser.filters[1].draw_detailed_hover(canvas_main);
+					file_browser.filters[1].draw_default_txt(canvas_main);
 					REDRAW_WINDOW();
+					if (file_browser.filters[1].isLCD(m_msg))
+					{
+						file_browser.filters[1].draw_detailed_push(canvas_main);
+						file_browser.filters[1].draw_default_txt(canvas_main);
+						REDRAW_WINDOW();
+					}
+					if (file_browser.filters[1].isLCU(m_msg))
+					{
+						file_browser.FilterData();
+						file_browser.DrawDataChart(canvas_main, file_browser.info.processed_data, RED);
+					}
 				}
-				if (file_browser.filter[1].isLCU(m_msg))
+				else
 				{
-					file_browser.FilterData();
-					file_browser.DrawProcessedDataChart(canvas_main);
+					file_browser.filters[1].draw_detailed_default(canvas_main);
+					file_browser.filters[1].draw_default_txt(canvas_main);
+					REDRAW_WINDOW();
 				}
 			}
 

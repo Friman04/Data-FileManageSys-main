@@ -32,6 +32,16 @@ void FileBrowser::SetDataInfoDrawingArea(int x1, int y1, int x2, int y2)
 	data_info.point2.y = y2;
 }
 
+void FileBrowser::SetFuncBtnDrawingArea(int x1, int y1, int x2, int y2)
+{
+	func_btn.point1.x = x1;
+	func_btn.point1.y = y1;
+	func_btn.point2.x = x2;
+	func_btn.point2.y = y2;
+}
+
+
+
 void FileBrowser::FlushDataIndex() { data_index = 0; }
 
 
@@ -51,6 +61,14 @@ bool FileBrowser::IsHomePage()
 bool FileBrowser::IsEndPage()
 {
 	if (data_page == page_num - 1)
+		return true;
+	else
+		return false;
+}
+
+bool FileBrowser::IsInFuncArea(ExMessage msg)
+{
+	if (msg.x > func_btn.point1.x && msg.y > func_btn.point1.y && msg.x < func_btn.point2.x && msg.y < func_btn.point2.y)
 		return true;
 	else
 		return false;
@@ -179,6 +197,7 @@ void FileBrowser::LoadData(ExMessage msg)
 void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 {
 	/*绘图常数*/
+	const int module_margin = 50;		// 模块间距
 	const int margin = 30;				// 与折线图的边距
 	const int extension = 20;			// 坐标轴正半轴延伸长度
 	const int interval = 50;			// 标记线间距
@@ -188,7 +207,8 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	const int info_txt_height = 24;		// 信息文字大小
 	const float txt_line_space = 1.25;	// 行间距（倍数）
 	SetLineChartDrawingArea(WINDOW_WID * MID_LEFT + 350, WINDOW_WID * EX_LEFT + 100, WINDOW_WID - 100, WINDOW_HEI - 150);
-	SetDataInfoDrawingArea(WINDOW_WID * MID_LEFT + 50, WINDOW_WID * EX_LEFT + 100 - margin - extension, WINDOW_WID * MID_LEFT + 250, WINDOW_WID * EX_LEFT + 400);
+	SetDataInfoDrawingArea(WINDOW_WID * MID_LEFT + module_margin, WINDOW_WID * EX_LEFT + 100 - margin - extension, WINDOW_WID * MID_LEFT + 250, WINDOW_WID * EX_LEFT + 350);
+	SetFuncBtnDrawingArea(WINDOW_WID * MID_LEFT + module_margin, WINDOW_WID * EX_LEFT + 100 + module_margin, WINDOW_WID * MID_LEFT + 250, WINDOW_HEI - module_margin);
 
 	char mean[DATA_WIDTH];
 	char mean_suffix[DATA_WIDTH + 10] = "均值：\n";
@@ -308,13 +328,7 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	}
 
 	// 绘制折线图
-	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);	
-	float x0 = x1;
-	for (int i = 0; i < info.count - 1; i++)
-	{
-		canvas.Line(x0, y1 + (info.max - info.data[i]) * hratio, x0 + xval, y1 + (info.max - info.data[i + 1]) * hratio, true, BLUE);
-		x0 += xval;
-	}
+	DrawDataChart(canvas, info.data, BLUE);
 
 	// 均值
 	canvas.SetLineColor(YELLOW);
@@ -327,7 +341,7 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	mean_filter_btn.setText(L"均值滤波", 23, 0, L"微软雅黑", BLACK);
 	mean_filter_btn.draw_default_txt(canvas);
 
-	filter[1] = mean_filter_btn;
+	filters[1] = mean_filter_btn;
 
 }
 
@@ -336,7 +350,7 @@ void FileBrowser::FilterData()
 	mean_filter(info.processed_data, info.data, info.count, 5);
 }
 
-void FileBrowser::DrawProcessedDataChart(hiex::Canvas& canvas)
+void FileBrowser::DrawDataChart(hiex::Canvas& canvas, float data[], COLORREF c)
 {
 	float x1 = line_chart.point1.x;					// 左上角x坐标
 	int y1 = line_chart.point1.y;					// 左上角y坐标
@@ -350,7 +364,7 @@ void FileBrowser::DrawProcessedDataChart(hiex::Canvas& canvas)
 	float x0 = x1;
 	for (int i = 0; i < info.count - 1; i++)
 	{
-		canvas.Line(x0, y1 + (info.max - info.processed_data[i]) * hratio, x0 + xval, y1 + (info.max - info.processed_data[i + 1]) * hratio, true, RED);
+		canvas.Line(x0, y1 + (info.max - data[i]) * hratio, x0 + xval, y1 + (info.max - data[i + 1]) * hratio, true, c);
 		x0 += xval;
 	}
 

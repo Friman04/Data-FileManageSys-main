@@ -84,7 +84,6 @@ float mean_filter(float destination[], float a[], int n, int kernel_size)
                 window.pop();
         }
     }
-
 }
 
 intPair align(int x, int y, int w, int h, int wid, int hei, int align_mode)
