@@ -49,6 +49,11 @@ typedef struct
     int x, y;
 }intPair;
 
+typedef struct
+{
+    intPair point1;     ///<- 左上角点
+    intPair point2;     ///<- 右下角点
+}squaredArea;
 
 void arraycopy(float destination[], float source[], int n); //数组拷贝
 void arraysub(float x[], float y[], float z[], int n);// z=x-y;

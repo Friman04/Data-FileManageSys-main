@@ -16,7 +16,28 @@ void FileBrowser::SetDataIndex(int index) { data_index = index; }
 
 void FileBrowser::SetDataPage(int page) { data_page = page; }
 
+void FileBrowser::SetLineChartDrawingArea(int x1, int y1, int x2, int y2)
+{	
+	line_chart.point1.x = x1;
+	line_chart.point1.y = y1;
+	line_chart.point2.x = x2;
+	line_chart.point2.y = y2;
+}
+
+void FileBrowser::SetDataInfoDrawingArea(int x1, int y1, int x2, int y2)
+{
+	data_info.point1.x = x1;
+	data_info.point1.y = y1;
+	data_info.point2.x = x2;
+	data_info.point2.y = y2;
+}
+
 void FileBrowser::FlushDataIndex() { data_index = 0; }
+
+void FileBrowser::ClearDataDrawingZone(hiex::Canvas& canvas)
+{
+	canvas.SolidRectangle(WINDOW_WID * MID_LEFT + 2, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, 0xDDDDDD);	// 30为底部安全边距
+}
 
 bool FileBrowser::IsHomePage()
 {
@@ -68,7 +89,8 @@ void FileBrowser::LoadDataFileName(const char* filename)
 void FileBrowser::RenderFileBrowser(hiex::Canvas& canvas)
 {
 	canvas.ClearRectangle(WINDOW_WID * EX_LEFT + 1, WINDOW_WID * EX_LEFT, WINDOW_WID * MID_LEFT - 2, WINDOW_HEI - 50);   ///注意在其他分辨率下此处安全边距的设置
-	canvas.SetTextStyle(txt_height, txt_width, L"微软雅黑");  //文件资源管理器（文字及按钮绘制）
+	
+	canvas.SetTextStyle(txt_height, txt_width, L"微软雅黑");  //文件资源管理器（数据名及按钮绘制）
 	canvas.SetBkMode(TRANSPARENT);
 	canvas.SetTextColor(BLACK);
 	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);
@@ -144,42 +166,53 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 {
 	const char* pname = info.filename;
 	char mean[DATA_WIDTH];
-	char mean_suffix[DATA_WIDTH + 10] = "均值：";
+	char mean_suffix[DATA_WIDTH + 10] = "均值：\n";
 	sprintf(mean, "%f", info.mean);
 	strcat(mean_suffix, mean);
 	char var[DATA_WIDTH];
-	char var_suffix[DATA_WIDTH + 10] = "方差：";
+	char var_suffix[DATA_WIDTH + 10] = "方差：\n";
 	sprintf(var, "%f", info.variance);
 	strcat(var_suffix, var);
 	const char* pmean = mean_suffix;
 	const char* pvar = var_suffix;
 
+	SetLineChartDrawingArea(WINDOW_WID * MID_LEFT + 250, WINDOW_WID * EX_LEFT + 100, WINDOW_WID - 100, WINDOW_HEI - 100);
 
-	float x1 = WINDOW_WID * MID_LEFT + 50;			// 左上角x坐标
-	int y1 = WINDOW_WID * EX_LEFT + 50;			// 左上角y坐标
-	int x2 = WINDOW_WID - 50;						// 右下角x坐标
-	int y2 = WINDOW_HEI - 50;						// 右下角y坐标
+	float x1 = line_chart.point1.x;					// 左上角x坐标
+	int y1 = line_chart.point1.y;					// 左上角y坐标
+	int x2 = line_chart.point2.x;					// 右下角x坐标
+	int y2 = line_chart.point2.y;					// 右下角y坐标
+
 	const float xval = (x2 - x1) / info.count;		// 每两点间的横坐标之差
 	const float hratio = (y2 - y1) / info.scale;	// 高度拉伸的比例
-	canvas.SolidRectangle(WINDOW_WID * MID_LEFT + 2, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, RGB(204, 204, 204));	// 30为底部安全边距
-	textAlign(canvas, char2wchar(pname), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP);
-	textAlign(canvas, char2wchar(pmean), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, BOTTOM_LEFT);
-	textAlign(canvas, char2wchar(pvar), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP_LEFT);
-	canvas.SetLineColor(BLUE);
+	ClearDataDrawingZone(canvas);	// 清除整个绘画区域
+
+	// 绘制坐标轴
 	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);
 
+
+
+
+
+	// 绘制折线图
+	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);	
 	float x0 = x1;
 	for (int i = 0; i < info.count - 1; i++)
 	{
-		canvas.Line(x0, y1 + (info.max - info.data[i]) * hratio, x0 + xval, y1 + (info.max - info.data[i + 1]) * hratio);
+		canvas.Line(x0, y1 + (info.max - info.data[i]) * hratio, x0 + xval, y1 + (info.max - info.data[i + 1]) * hratio, true, BLUE);
 		x0 += xval;
 	}
+
 	// 均值
 	canvas.SetLineColor(YELLOW);
 	canvas.SetLineStyle(PS_DASH | PS_JOIN_BEVEL, 3);
-
 	canvas.Line(x1, y1 + (info.max - info.mean) * hratio, x2, y1 + (info.max - info.mean) * hratio);
 
+
+	textAlign(canvas, char2wchar(pname), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP);
+	textAlign(canvas, char2wchar(pmean), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, BOTTOM_LEFT);
+	textAlign(canvas, char2wchar(pvar), 24, 0, L"微软雅黑", WINDOW_WID * MID_LEFT, WINDOW_WID * EX_LEFT, WINDOW_WID * (1 - MID_LEFT), WINDOW_HEI - WINDOW_WID * EX_LEFT - 30, TOP_LEFT);
+	//canvas.Draw_Text();
 }
 
 FileBrowser::~FileBrowser()

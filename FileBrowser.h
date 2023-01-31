@@ -15,9 +15,13 @@ public:
 	unsigned int GetTotalPages();
 	void SetDataIndex(int index);
 	void SetDataPage(int page);
+	void SetLineChartDrawingArea(int x1, int y1, int x2, int y2);
+	void SetDataInfoDrawingArea(int x1, int y1, int x2, int y2);
 	bool IsHomePage();
 	bool IsEndPage();
 	void FlushDataIndex();
+
+	void ClearDataDrawingZone(hiex::Canvas& canvas);
 
 	void LoadDataFileName(const char* filename);
 	void RenderFileBrowser(hiex::Canvas& canvas);
@@ -42,6 +46,8 @@ private:
 	unsigned int data_len;																			///<-文件总个数
 	unsigned int page_num;																			///<-总页数
 	dataInfo info;																					///<-数据信息
+	squaredArea line_chart;																			///<-绘制折线图的区域
+	squaredArea data_info;																			///<-绘制数据文件信息的区域
 
 	char buf1[MAX_LEN];					///<-一级缓冲区，加载数据时使用。通过 WinAPI 从 Windows 资源管理器中读取文件名称。
 	char* data_names[DATA_NUM];			///<-存放所有文件名的区域（可能需要通过动态分配内存优化）

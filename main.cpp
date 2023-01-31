@@ -5,7 +5,7 @@
  * @site		https://github.com/Friman04/Data-FileManageSys-main
  * @date		2023.01.12
  * @envir		Windows 11 dev_Build 25272.rs_prerelease.221216-1237 | Visual Studio 2022 | EasyX_20220901 | HiEasyX Ver 0.3.0
- * @version     0.1Beta2b
+ * @version     0.1Beta3a
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
@@ -28,7 +28,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define _SYS_VER_STR_	L"Ver 0.1Beta2b"
+#define _SYS_VER_STR_	L"Ver 0.1Beta3a"
 
 #include "my_Button.h"
 #include "FileBrowser.h"
@@ -390,6 +390,7 @@ void home()
 
 	hiex::Canvas canvas_main;
 	hiex::Window wnd(int(WINDOW_WID), WINDOW_HEI);
+	FileBrowser file_browser;
 	wnd.BindCanvas(&canvas_main);
 	hiex::AutoExit();
 	HWND hwnd = wnd.GetHandle();
@@ -431,10 +432,9 @@ void home()
 		canvas_main.SolidRectangle(0, 0, WINDOW_WID * EX_LEFT, WINDOW_HEI); // 左侧深蓝色背景
 		canvas_main.SetFillColor(0xEFE1CF);
 		canvas_main.SolidRectangle(0, 0, WINDOW_WID, WINDOW_WID * EX_LEFT); // 顶侧浅蓝色背景
-		canvas_main.SolidRectangle(WINDOW_WID * MID_LEFT + 2, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, RGB(204, 204, 204));	// 数据绘图区背景，30为底部安全边距
-
+		file_browser.ClearDataDrawingZone(canvas_main);
 		//logo
-		canvas_main.Load_Image_Alpha(L"sprites/logo_light.png", 0, 0, false, WINDOW_WID * EX_LEFT - 1, WINDOW_WID * EX_LEFT - 1, 255U, true);
+		canvas_main.Load_Image_Alpha(L"sprites/logo_light.png", 0, 0, false, WINDOW_WID * EX_LEFT + 1, WINDOW_WID * EX_LEFT + 1, 255U, true);
 
 		// 文字
 		textAlign(canvas_main, L"工业数据分析与文件信息管理系统", 36, 0, L"黑体", WINDOW_WID * EX_LEFT, 0, WINDOW_WID * (1 - EX_LEFT), WINDOW_WID * EX_LEFT); // 标题
@@ -452,7 +452,6 @@ void home()
 		// 按钮控件逻辑
 
 		// 资源管理器
-		FileBrowser file_browser;
 		file_browser.LoadDataFileName("data/*.txt");
 		file_browser.FlushDataIndex();
 		canvas_main.SetLineColor(0xAAAAAA);
@@ -485,33 +484,33 @@ void home()
 				/// LOGIN
 				switch (m_msg.message)
 				{
-				case WM_LBUTTONDOWN:
-				{
-					canvas_main.SetFillColor(0x999999);
-					canvas_main.SolidRoundRect(WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * (1 - EX_LEFT / 4), WINDOW_WID * EX_LEFT * 3 / 4, 20, 20);
-					imageAlign_alpha(canvas_main, L"sprites/login.png", 32, 32, WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * EX_LEFT / 2, WINDOW_WID * EX_LEFT / 2);
-					REDRAW_WINDOW();
-					break;
-				}
-				case WM_LBUTTONUP:
-				{
-					textAlign(canvas_main, _T("LOGIN"), 36, 0, _T("微软雅黑"), 0, 0, WINDOW_WID, WINDOW_WID); //do somthing
+					case WM_LBUTTONDOWN:
+					{
+						canvas_main.SetFillColor(0x999999);
+						canvas_main.SolidRoundRect(WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * (1 - EX_LEFT / 4), WINDOW_WID * EX_LEFT * 3 / 4, 20, 20);
+						imageAlign_alpha(canvas_main, L"sprites/login.png", 32, 32, WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * EX_LEFT / 2, WINDOW_WID * EX_LEFT / 2);
+						REDRAW_WINDOW();
+						break;
+					}
+					case WM_LBUTTONUP:
+					{
+						textAlign(canvas_main, _T("LOGIN"), 36, 0, _T("微软雅黑"), 0, 0, WINDOW_WID, WINDOW_WID); //do somthing
 
-					canvas_main.SetFillColor(0xCCCCCC);
-					canvas_main.SolidRoundRect(WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * (1 - EX_LEFT / 4), WINDOW_WID * EX_LEFT * 3 / 4, 20, 20);
-					imageAlign_alpha(canvas_main, L"sprites/login.png", 32, 32, WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * EX_LEFT / 2, WINDOW_WID * EX_LEFT / 2);
-					REDRAW_WINDOW();
-					break;
-				}
-				default:
-				{
-					// 鼠标指针经过按钮
-					canvas_main.SetFillColor(0xCCCCCC);
-					canvas_main.SolidRoundRect(WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * (1 - EX_LEFT / 4), WINDOW_WID * EX_LEFT * 3 / 4, 20, 20);
-					imageAlign_alpha(canvas_main, L"sprites/login.png", 32, 32, WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * EX_LEFT / 2, WINDOW_WID * EX_LEFT / 2);
-					REDRAW_WINDOW();
-					break;
-				}
+						canvas_main.SetFillColor(0xCCCCCC);
+						canvas_main.SolidRoundRect(WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * (1 - EX_LEFT / 4), WINDOW_WID * EX_LEFT * 3 / 4, 20, 20);
+						imageAlign_alpha(canvas_main, L"sprites/login.png", 32, 32, WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * EX_LEFT / 2, WINDOW_WID * EX_LEFT / 2);
+						REDRAW_WINDOW();
+						break;
+					}
+					default:
+					{
+						// 鼠标指针经过按钮
+						canvas_main.SetFillColor(0xDDDDDD);
+						canvas_main.SolidRoundRect(WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * (1 - EX_LEFT / 4), WINDOW_WID * EX_LEFT * 3 / 4, 20, 20);
+						imageAlign_alpha(canvas_main, L"sprites/login.png", 32, 32, WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * EX_LEFT / 2, WINDOW_WID * EX_LEFT / 2);
+						REDRAW_WINDOW();
+						break;
+					}
 				}
 			}
 			else if (isLastEnable && m_msg.x > WINDOW_WID * EX_LEFT + 10 && m_msg.y > WINDOW_HEI - 45 && m_msg.x < WINDOW_WID * EX_LEFT + 42 && m_msg.y < WINDOW_HEI - 13) // 如果鼠标在这个区间内
@@ -519,55 +518,55 @@ void home()
 				/// LastPage
 				switch (m_msg.message)
 				{
-				case WM_LBUTTONDOWN:
-				{
-					canvas_main.SetFillColor(0x999999);
-					canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
-					imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
-					REDRAW_WINDOW();
-					break;
-				}
-				case WM_LBUTTONUP:
-				{
-					textAlign(canvas_main, _T("Last"), 36, 0, _T("微软雅黑"), 0, 0, WINDOW_WID, WINDOW_WID); //do somthing
-					file_browser.SetDataPage(file_browser.GetDataPage() - 1);
-					file_browser.RenderFileBrowser(canvas_main);
-
-					if (file_browser.IsHomePage())
+					case WM_LBUTTONDOWN:
 					{
-						isLastEnable = false;
-						canvas_main.SetFillColor(WHITE);
-						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * MID_LEFT - 10, WINDOW_HEI - 13, 20, 20);
-						imageAlign_alpha(canvas_main, L"sprites/last_page_disabled.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
-					}
-					else
-					{
-						canvas_main.SetFillColor(WHITE);
-						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * MID_LEFT - 10, WINDOW_HEI - 13, 20, 20);
-						canvas_main.SetFillColor(0xCCCCCC);
+						canvas_main.SetFillColor(0x999999);
 						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
 						imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
+						REDRAW_WINDOW();
+						break;
 					}
+					case WM_LBUTTONUP:
+					{
+						textAlign(canvas_main, _T("Last"), 36, 0, _T("微软雅黑"), 0, 0, WINDOW_WID, WINDOW_WID); //do somthing
+						file_browser.SetDataPage(file_browser.GetDataPage() - 1);
+						file_browser.RenderFileBrowser(canvas_main);
 
-					sprintf(page_txt, "%d / %d", file_browser.GetDataPage() + 1, file_browser.GetTotalPages());
-					const char* ppage_txt = page_txt;
-					textAlign(canvas_main, char2wchar(ppage_txt), 20, 0, L"等线", WINDOW_WID * EX_LEFT, WINDOW_HEI - 45, WINDOW_WID * (MID_LEFT - EX_LEFT) - 10, 32, RIGHT);		/// 10为安全边距
+						if (file_browser.IsHomePage())
+						{
+							isLastEnable = false;
+							canvas_main.SetFillColor(WHITE);
+							canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * MID_LEFT - 10, WINDOW_HEI - 13, 20, 20);
+							imageAlign_alpha(canvas_main, L"sprites/last_page_disabled.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
+						}
+						else
+						{
+							canvas_main.SetFillColor(WHITE);
+							canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * MID_LEFT - 10, WINDOW_HEI - 13, 20, 20);
+							canvas_main.SetFillColor(0xCCCCCC);
+							canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
+							imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
+						}
 
-					canvas_main.SetFillColor(WHITE);
-					canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
-					imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
-					REDRAW_WINDOW();
-					break;
-				}
-				default:
-				{
-					// 鼠标指针经过按钮
-					canvas_main.SetFillColor(0xCCCCCC);
-					canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
-					imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
-					REDRAW_WINDOW();
-					break;
-				}
+						sprintf(page_txt, "%d / %d", file_browser.GetDataPage() + 1, file_browser.GetTotalPages());
+						const char* ppage_txt = page_txt;
+						textAlign(canvas_main, char2wchar(ppage_txt), 20, 0, L"等线", WINDOW_WID * EX_LEFT, WINDOW_HEI - 45, WINDOW_WID * (MID_LEFT - EX_LEFT) - 10, 32, RIGHT);		/// 10为安全边距
+
+						canvas_main.SetFillColor(WHITE);
+						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
+						imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
+						REDRAW_WINDOW();
+						break;
+					}
+					default:
+					{
+						// 鼠标指针经过按钮
+						canvas_main.SetFillColor(0xDDDDDD);
+						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
+						imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
+						REDRAW_WINDOW();
+						break;
+					}
 				}
 
 			}
@@ -576,54 +575,54 @@ void home()
 				/// NextPage
 				switch (m_msg.message)
 				{
-				case WM_LBUTTONDOWN:
-				{
-					canvas_main.SetFillColor(0x999999);
-					canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
-					imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
-					REDRAW_WINDOW();
-					break;
-				}
-				case WM_LBUTTONUP:
-				{
-					textAlign(canvas_main, _T("Next"), 36, 0, _T("微软雅黑"), 0, 0, WINDOW_WID, WINDOW_WID); //do somthing
-					file_browser.SetDataPage(file_browser.GetDataPage() + 1);
-					file_browser.RenderFileBrowser(canvas_main);
-
-					if (file_browser.IsEndPage())
+					case WM_LBUTTONDOWN:
 					{
-						isNextEnable = false;
-						canvas_main.SetFillColor(WHITE);
-						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * MID_LEFT - 10, WINDOW_HEI - 13, 20, 20);
-						imageAlign_alpha(canvas_main, L"sprites/next_page_disabled.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
-					}
-					else
-					{
-						canvas_main.SetFillColor(WHITE);
-						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * MID_LEFT - 10, WINDOW_HEI - 13, 20, 20);
-						canvas_main.SetFillColor(0xCCCCCC);
+						canvas_main.SetFillColor(0x999999);
 						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
 						imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
+						REDRAW_WINDOW();
+						break;
 					}
-					sprintf(page_txt, "%d / %d", file_browser.GetDataPage() + 1, file_browser.GetTotalPages());
-					const char* ppage_txt = page_txt;
-					textAlign(canvas_main, char2wchar(ppage_txt), 20, 0, L"等线", WINDOW_WID * EX_LEFT, WINDOW_HEI - 45, WINDOW_WID * (MID_LEFT - EX_LEFT) - 10, 32, RIGHT);		/// 10为安全边距
+					case WM_LBUTTONUP:
+					{
+						textAlign(canvas_main, _T("Next"), 36, 0, _T("微软雅黑"), 0, 0, WINDOW_WID, WINDOW_WID); //do somthing
+						file_browser.SetDataPage(file_browser.GetDataPage() + 1);
+						file_browser.RenderFileBrowser(canvas_main);
 
-					canvas_main.SetFillColor(WHITE);
-					canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
-					imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
-					REDRAW_WINDOW();
-					break;
-				}
-				default:
-				{
-					// 鼠标指针经过按钮
-					canvas_main.SetFillColor(0xCCCCCC);
-					canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
-					imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
-					REDRAW_WINDOW();
-					break;
-				}
+						if (file_browser.IsEndPage())
+						{
+							isNextEnable = false;
+							canvas_main.SetFillColor(WHITE);
+							canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * MID_LEFT - 10, WINDOW_HEI - 13, 20, 20);
+							imageAlign_alpha(canvas_main, L"sprites/next_page_disabled.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
+						}
+						else
+						{
+							canvas_main.SetFillColor(WHITE);
+							canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * MID_LEFT - 10, WINDOW_HEI - 13, 20, 20);
+							canvas_main.SetFillColor(0xCCCCCC);
+							canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
+							imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
+						}
+						sprintf(page_txt, "%d / %d", file_browser.GetDataPage() + 1, file_browser.GetTotalPages());
+						const char* ppage_txt = page_txt;
+						textAlign(canvas_main, char2wchar(ppage_txt), 20, 0, L"等线", WINDOW_WID * EX_LEFT, WINDOW_HEI - 45, WINDOW_WID * (MID_LEFT - EX_LEFT) - 10, 32, RIGHT);		/// 10为安全边距
+
+						canvas_main.SetFillColor(WHITE);
+						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 42, WINDOW_HEI - 13, 20, 20);
+						imageAlign_alpha(canvas_main, L"sprites/last_page.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
+						REDRAW_WINDOW();
+						break;
+					}
+					default:
+					{
+						// 鼠标指针经过按钮
+						canvas_main.SetFillColor(0xDDDDDD);
+						canvas_main.SolidRoundRect(WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, WINDOW_WID * EX_LEFT + 82, WINDOW_HEI - 13, 20, 20);
+						imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
+						REDRAW_WINDOW();
+						break;
+					}
 				}
 
 			}

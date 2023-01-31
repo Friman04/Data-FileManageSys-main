@@ -1,5 +1,38 @@
-﻿  Core.cpp
-C:\Users\Friman\Downloads\Data-FileManageSys-main\Core.cpp(68,75): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\Friman\Downloads\Data-FileManageSys-main\Core.cpp(70,70): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\Friman\Downloads\Data-FileManageSys-main\Core.cpp(135): warning C4715: “align”: 不是所有的控件路径都返回值
+﻿  FileBrowser.cpp
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.h(41,73): warning C4244: “初始化”: 从“double”转换到“const unsigned int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.h(43,70): warning C4244: “初始化”: 从“double”转换到“const int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(39,73): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(39,64): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(39,46): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(91,94): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(91,63): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(91,45): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(97,8): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(97,39): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(114,76): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(115,76): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(116,86): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(179,94): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(179,76): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(179,48): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(181,11): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(202,74): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(202,63): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(202,22): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(202,15): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(209,63): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(209,21): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(209,14): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(212,171): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(212,119): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(212,99): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(212,76): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(213,171): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(213,119): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(213,99): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(213,76): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(214,170): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(214,118): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(214,98): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.cpp(214,75): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
   management system.vcxproj -> C:\Users\Friman\Downloads\Data-FileManageSys-main\x64\Debug\management system.exe
