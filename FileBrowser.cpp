@@ -94,7 +94,7 @@ void FileBrowser::RenderFileBrowser(hiex::Canvas& canvas)
 	
 	canvas.SetTextStyle(txt_height, txt_width, L"微软雅黑");  //文件资源管理器（数据名及按钮绘制）
 	canvas.SetBkMode(TRANSPARENT);
-	canvas.SetTextColor(BLACK);
+	canvas.SetLineColor(BLACK);
 	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);
 	int x = WINDOW_WID * EX_LEFT + 10, y = WINDOW_WID * EX_LEFT + 40;		///<-10和40为安全边距
 	data_index = data_page * row_num;
@@ -113,6 +113,7 @@ void FileBrowser::RenderFileBrowser(hiex::Canvas& canvas)
 			buf2[max_len - 1] = '\0';
 			canvas.OutTextXY(x, y, char2wchar(buf2));
 		}
+		canvas.SetLineColor(0xAAAAAA);
 		canvas.Line(x - 10, y - (data_btn_height - txt_height) / 2, WINDOW_WID * MID_LEFT, y - (data_btn_height - txt_height) / 2);
 		canvas.Line(x - 10, y + (data_btn_height + txt_height) / 2, WINDOW_WID * MID_LEFT, y + (data_btn_height + txt_height) / 2);
 		file_buttons[data_index](x - 10, y - (data_btn_height - txt_height) / 2, WINDOW_WID* (MID_LEFT - EX_LEFT), data_btn_height);
@@ -321,9 +322,37 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	canvas.Line(x1, y1 + (info.max - info.mean) * hratio, x2, y1 + (info.max - info.mean) * hratio);
 
 	// 按钮
-	//my_Button filter(WINDOW_WID * MID_LEFT, 500, 100, 30);
+	my_Button mean_filter_btn(WINDOW_WID * MID_LEFT + 50, 500, 100, 30);
+	mean_filter_btn.draw_detailed_default(canvas);
+	mean_filter_btn.setText(L"均值滤波", 23, 0, L"微软雅黑", BLACK);
+	mean_filter_btn.draw_default_txt(canvas);
 
+	filter[1] = mean_filter_btn;
 
+}
+
+void FileBrowser::FilterData()
+{
+	mean_filter(info.processed_data, info.data, info.count, 5);
+}
+
+void FileBrowser::DrawProcessedDataChart(hiex::Canvas& canvas)
+{
+	float x1 = line_chart.point1.x;					// 左上角x坐标
+	int y1 = line_chart.point1.y;					// 左上角y坐标
+	int x2 = line_chart.point2.x;					// 右下角x坐标
+	int y2 = line_chart.point2.y;					// 右下角y坐标
+
+	const float xval = (x2 - x1) / info.count;		// 每两点间的横坐标之差
+	const float hratio = (y2 - y1) / info.scale;	// 高度拉伸的比例
+
+	canvas.SetLineStyle(PS_SOLID | PS_JOIN_BEVEL, 1);
+	float x0 = x1;
+	for (int i = 0; i < info.count - 1; i++)
+	{
+		canvas.Line(x0, y1 + (info.max - info.processed_data[i]) * hratio, x0 + xval, y1 + (info.max - info.processed_data[i + 1]) * hratio, true, RED);
+		x0 += xval;
+	}
 
 }
 

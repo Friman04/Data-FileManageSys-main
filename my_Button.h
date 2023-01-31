@@ -21,23 +21,29 @@ public:
     void setPos(int x, int y);
     void setSize(int w, int h);
     void setIconSize(int icon_w, int icon_h);
-    void setText(LPCTSTR str);
-    void setImage(hiex::ImageBlock& img);
+    void setText(LPCTSTR _str, int _nHeight, int _nWidth, LPCTSTR _font, COLORREF _c, LONG _esc = 0, LONG _ori = 0, int _mode = TRANSPARENT);
+    //void setImage(hiex::ImageBlock& img);
     void setImage(LPCTSTR str);
     void setRoundRadius(int r);
 
     bool isIn(ExMessage msg);
     bool isLCD(ExMessage msg);
     bool isLCU(ExMessage msg);
-    void createIconCanvas();
-    void createHoverCanvas();
-    void createPushCanvas();
+    //void createIconCanvas();
+    //void createHoverCanvas();
+    //void createPushCanvas();
 
-    void draw_default_img();
-    void draw_default_txt();
+    //void draw_default_img();
+    //void draw_default_txt();
+    void draw_default_txt(hiex::Canvas& canvas);
+
     //void draw_hover();
     void draw_hover(hiex::Canvas& canvas);
-    void draw_push();
+    void draw_detailed_default(hiex::Canvas& canvas);
+    void draw_detailed_hover(hiex::Canvas& canvas);
+    void draw_detailed_push(hiex::Canvas& canvas);
+
+    //void draw_push();
 
     ~my_Button() {}
 

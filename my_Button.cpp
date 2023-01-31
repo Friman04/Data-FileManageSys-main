@@ -58,9 +58,16 @@ void my_Button::setIconSize(int icon_w, int icon_h)
     this->icon_pos = align(x, y, w, h, icon_w, icon_h);
 }
 
-void my_Button::setText(LPCTSTR str)
+void my_Button::setText(LPCTSTR _str, int _nHeight, int _nWidth, LPCTSTR _font, COLORREF _c, LONG _esc, LONG _ori, int _mode)
 {
-    this->text.str = str;
+    text.str = _str;
+    text.nHeight = _nHeight;
+    text.nWidth = _nWidth;
+    text.font = _font;
+    text.c = _c;
+    text.esc = _esc;
+    text.ori = _ori;
+    text.mode = _mode;
 }
 
 //void my_Button::setImage(hiex::ImageBlock& img)
@@ -154,6 +161,11 @@ bool my_Button::isLCU(ExMessage msg)
 //
 //}
 
+void my_Button::draw_default_txt(hiex::Canvas& canvas)
+{
+    textAlign(canvas, text.str, text.nHeight, text.nWidth, text.font, x, y, w, h);
+}
+
 void my_Button::draw_hover(hiex::Canvas& canvas)
 {
     canvas.SetLineThickness(4);
@@ -163,6 +175,27 @@ void my_Button::draw_hover(hiex::Canvas& canvas)
     canvas.SetLineThickness(2);
     canvas.SetLineColor(0xAAAAAA);
 
+}
+
+void my_Button::draw_detailed_default(hiex::Canvas& canvas)
+{
+    canvas.SetLineStyle(PS_SOLID);
+    canvas.SetLineThickness(1);
+    canvas.FillRoundRect(x, y, x + w, y + h, 10, 10, true, BLACK, WHITE);
+}
+
+void my_Button::draw_detailed_hover(hiex::Canvas& canvas)
+{
+    canvas.SetLineStyle(PS_SOLID);
+    canvas.SetLineThickness(1);
+    canvas.FillRoundRect(x, y, x + w, y + h, 10, 10, true, BLACK, hover_c);
+}
+
+void my_Button::draw_detailed_push(hiex::Canvas& canvas)
+{
+    canvas.SetLineStyle(PS_SOLID);
+    canvas.SetLineThickness(1);
+    canvas.FillRoundRect(x, y, x + w, y + h, 10, 10, true, BLACK, push_c);
 }
 
 //void my_Button::draw_push()

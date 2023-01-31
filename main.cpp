@@ -5,7 +5,7 @@
  * @site		https://github.com/Friman04/Data-FileManageSys-main
  * @date		2023.01.12
  * @envir		Windows 11 dev_Build 25272.rs_prerelease.221216-1237 | Visual Studio 2022 | EasyX_20220901 | HiEasyX Ver 0.3.0
- * @version     0.1Beta3d
+ * @version     0.1Beta4
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
@@ -34,7 +34,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define _SYS_VER_STR_	L"Ver 0.1Beta3d"
+#define _SYS_VER_STR_	L"Ver 0.1Beta4"
 
 #include "my_Button.h"
 #include "FileBrowser.h"
@@ -401,6 +401,8 @@ void home()
 	hiex::AutoExit();
 	HWND hwnd = wnd.GetHandle();
 
+	const int out_r = 8;
+
 	while (1)
 	{
 		/*绘制GUI框架*/
@@ -460,7 +462,7 @@ void home()
 		// 资源管理器
 		file_browser.LoadDataFileName("data/*.txt");
 		file_browser.FlushDataIndex();
-		canvas_main.SetLineColor(0xAAAAAA);
+		canvas_main.SetLineColor(BLACK);
 		file_browser.RenderFileBrowser(canvas_main);  //初始化绘制
 
 		char page_txt[32];
@@ -476,12 +478,8 @@ void home()
 		ExMessage m_msg;
 
 
-		int count = 0;
 		while (1)
 		{
-			count++;
-
-
 			m_msg = getmessage(EX_MOUSE);
 
 			my_Button btn;
@@ -657,10 +655,42 @@ void home()
 					}
 				}
 			}
+			else if (file_browser.filter[1].isIn(m_msg))
+			{
+				file_browser.filter[1].draw_detailed_hover(canvas_main);
+				REDRAW_WINDOW();
+				if (file_browser.filter[1].isLCD(m_msg))
+				{
+					file_browser.filter[1].draw_detailed_push(canvas_main);
+					REDRAW_WINDOW();
+				}
+				if (file_browser.filter[1].isLCU(m_msg))
+				{
+					file_browser.FilterData();
+					file_browser.DrawProcessedDataChart(canvas_main);
+				}
+			}
 
 
+			else if (
+			(m_msg.x > WINDOW_WID * EX_LEFT - out_r &&	// 文件浏览器左端
+			m_msg.x < WINDOW_WID * EX_LEFT) ||
+			(m_msg.y > WINDOW_WID * EX_LEFT - out_r &&	// 文件浏览器上端
+			m_msg.y < WINDOW_WID * EX_LEFT) ||
+			(m_msg.x > WINDOW_WID * MID_LEFT &&			// 文件浏览器右端
+			m_msg.x < WINDOW_WID * MID_LEFT + out_r) ||
 
-			else    // 默认状态
+
+			(m_msg.x > WINDOW_WID * (1 - EX_LEFT * 3 / 4) - out_r &&
+			m_msg.x < WINDOW_WID * (1 - EX_LEFT * 3 / 4)) ||
+			(m_msg.x > WINDOW_WID * (1 - EX_LEFT / 4) &&
+			m_msg.x < WINDOW_WID * (1 - EX_LEFT / 4) + out_r) ||
+			(m_msg.y > WINDOW_WID * (1 - EX_LEFT / 4) - out_r &&
+			m_msg.y < WINDOW_WID * EX_LEFT * 3 / 4) ||
+			(m_msg.y > WINDOW_WID * EX_LEFT * 3 / 4 &&
+			m_msg.y < WINDOW_WID * EX_LEFT * 3 / 4 + out_r))
+
+			// 默认状态（伪退出事件）
 			{
 				/// LOGIN
 				canvas_main.SetFillColor(0xEFE1CF);

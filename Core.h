@@ -16,8 +16,6 @@ typedef struct
 typedef struct Text  ///<-[?]C++20标准中typerdef名称中使用的未命名的类不能声明非静态数据成员、成员枚举或成员类以外的成员。而该结构体中不包含类的实例化，这个bug的解决方式是命名改结构体。
 {
     LPCTSTR str;
-    int x;
-    int y;
     int nHeight;
     int nWidth;
     LPCTSTR font;
