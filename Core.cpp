@@ -129,61 +129,61 @@ intPair align(int x, int y, int w, int h, int wid, int hei, int align_mode)
 {
     intPair pos;
     switch (align_mode)
-    {
-    case 1:
-    {
-        pos.x = x;
-        pos.y = y;
-        return pos;
-    }
-    case 2:
-    {
-        pos.x = x + w / 2 - wid / 2;
-        pos.y = y;
-        return pos;
-    }
-    case 3:
-    {
-        pos.x = x + w - wid;
-        pos.y = y;
-        return pos;
-    }
-    case 4:
-    {
-        pos.x = x;
-        pos.y = y + h / 2 - hei / 2;
-        return pos;
-    }
-    case 5:
-    {
-        pos.x = x + w / 2 - wid / 2,
+        {
+        case 1:
+        {
+            pos.x = x;
+            pos.y = y;
+            return pos;
+        }
+        case 2:
+        {
+            pos.x = x + w / 2 - wid / 2;
+            pos.y = y;
+            return pos;
+        }
+        case 3:
+        {
+            pos.x = x + w - wid;
+            pos.y = y;
+            return pos;
+        }
+        case 4:
+        {
+            pos.x = x;
             pos.y = y + h / 2 - hei / 2;
-        return pos;
-    }
-    case 6:
-    {
-        pos.x = x + w - wid;
-        pos.y = y + h / 2 - hei / 2;
-        return pos;
-    }
-    case 7:
-    {
-        pos.x = x;
-        pos.y = y + h - hei;
-        return pos;
-    }
-    case 8:
-    {
-        pos.x = x + w / 2 - wid / 2;
-        pos.y = y + h - hei;
-        return pos;
-    }
-    case 9:
-    {
-        pos.x = x + w - wid;
-        pos.y = y + h - hei;
-        return pos;
-    }
+            return pos;
+        }
+        case 5:
+        {
+            pos.x = x + w / 2 - wid / 2,
+                pos.y = y + h / 2 - hei / 2;
+            return pos;
+        }
+        case 6:
+        {
+            pos.x = x + w - wid;
+            pos.y = y + h / 2 - hei / 2;
+            return pos;
+        }
+        case 7:
+        {
+            pos.x = x;
+            pos.y = y + h - hei;
+            return pos;
+        }
+        case 8:
+        {
+            pos.x = x + w / 2 - wid / 2;
+            pos.y = y + h - hei;
+            return pos;
+        }
+        case 9:
+        {
+            pos.x = x + w - wid;
+            pos.y = y + h - hei;
+            return pos;
+        }
     }
 }
 

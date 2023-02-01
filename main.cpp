@@ -5,33 +5,60 @@
  * @site		https://github.com/Friman04/Data-FileManageSys-main
  * @date		2023.01.12
  * @envir		Windows 11 dev_Build 25272.rs_prerelease.221216-1237 | Visual Studio 2022 | EasyX_20220901 | HiEasyX Ver 0.3.0
- * @version     0.1Beta5a
+ * @hardware	CPU:	12th Gen Intel(R) Core(TM) i7-12700H   2.30 GHz
+ *				GPU:	NVIDIA GeForce RTX 3060 Laptop GPU GDDR6 @ 6GB (192 bit)
+ *				
+ * @version     0.1Beta5b
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
- *				本程序可能需要足够的CPU单核性能和GPU性能，若出现轻微卡顿和延迟渲染现象为正常
- *
- * @note		写代码的时候 Windows Defence 报出疑似病毒，笑死了
- * @note		目前已知存在的bug（更多已修复bug可移步更新日志）
- *				1.【无风险】[2023-01-12]窗口大小及所有与绘制函数有关的尺寸参数实际均为所设置的1.5倍
- *					[可能的原因]未知。
- *					[解决方案]无。
- *				2.【无风险】[2023-01-13]渲染精度低
- *					[可能的原因]未知。
- *					[解决方案]无。
- *				1.【无风险】[2023-01-27]文件资源管理器中文件名若存在非英语字符可能会使得末尾显示过短或过长
- *					[可能原因]通过检验字符长度确定显示字符个数。
- *					[可行的解决方案]通过get文本的总宽度来决定显示字符个数。（可能极轻微地影响性能）
- *				2.【严重】【已解决】[2023-01-26]使用HiEasyX提供的Canvas扩展ImageBlock、Layer、Scene下的Render()和Redraw()方法导致处理鼠标消息过慢
- *					[可能的原因]未知。
- *					[可行的解决方案]重写底层，不使用Canvas扩展。
+ *				本程序依赖CPU单核性能和GPU性能，若出现轻微卡顿和延迟渲染现象为正常
+ *				第一次编译需要较长时间，请耐心等待
  * 
+ * @file
+	├── management system.sln       // 项目解决方案
+	├── main.cpp					// 主函数
+	├── Configuration.h				// 配置文件
+	├── Core.h						// 核心函数
+	├── Core.cpp
+	├── my_Button.h					// 按钮类
+	├── my_Button.cpp
+	├── FileBrowser.h				// 文件浏览器类
+	├── FileBrowser.cpp
+	├── HiEasyX
+	│   ├── HiEasyX.h				// HieasyX头文件
+	│   └── ...						// HieasyX其它库文件
+	├── data						// 数据文件夹
+	│   ├── mine.txt
+	│   ├── randn.txt
+	│   └── ...
+	├── sprites						// 资源文件夹
+	│   ├── drawing_bg.png
+	│   ├── last_page.png
+	│   ├── last_page_disabled.png
+	│   ├── login.png
+	│   ├── logo.png
+	│   ├── logo_144px.png
+	│   ├── logo_alpha_light.png
+	│   ├── logo_light.png
+	│   ├── next_page.png
+	│   ├── next_page_disabled.png
+	│   ├── up_arrow.png
+	│   └── white.png
+	├── VerChange.log				// 更新日志（不再维护）
+	├── 工业数据分析与文件信息管理系统0.1Beta5a-release20230201.exe		// 生成的程序
+	└── ...
+ * 
+ * @note		目前已知存在的bug（更多已修复bug可移步更新日志）
+ * @note		如果您发现了其它bug，可以通过邮箱联系我或者在 GitHub 上提交 Issue
+ * @bug			0.渲染精度低
  * @bug			1.文件浏览器第二页无法使用
  * @bug			2.性能问题
  * @bug			4.偶见的系统崩溃
  * @bug			5.文件资源管理器中文件名若存在非英语字符可能会使得末尾显示过短或过长
  * 
- * @bug			6.滤波方法导致数据偏移
+ * @bug			6.数据分析按钮未开发完全
+ * @bug			7.系统启动初期不稳定，容易闪退
  * 
  * @develop		1.登录系统
  * @develop		2.切换按钮
@@ -39,8 +66,7 @@
  *******************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
-
-#define _SYS_VER_STR_	L"Ver 0.1Beta5a"
+#define _SYS_VER_STR_	L"Ver 0.1Beta5b"
 
 #include "my_Button.h"
 #include "FileBrowser.h"
@@ -67,6 +93,7 @@ void createFile()
 	}
 }
 
+/*创建菜单*/
 int index()
 {
 	printf("___________________________________\n");
@@ -82,6 +109,7 @@ int index()
 	return kbhit;
 }
 
+/*菜单交互*/
 int indexInter()
 {
 	switch (index())
@@ -234,7 +262,7 @@ void login()
 
 
 /*
-void home_test()
+void home_deprecated()
 {
 	hiex::Canvas canvas_main;
 	hiex::Window wnd(WINDOW_WID, WINDOW_HEI);
@@ -398,14 +426,13 @@ void home_test()
 
 void home()
 {
-
-
 	hiex::Canvas canvas_main;
 	hiex::Window wnd(int(WINDOW_WID), WINDOW_HEI);
 	FileBrowser file_browser;
 	wnd.BindCanvas(&canvas_main);
 	hiex::AutoExit();
 	HWND hwnd = wnd.GetHandle();
+	EnableResizing(GetHWnd(), false);
 
 	const int out_r = 8;
 
@@ -456,11 +483,9 @@ void home()
 
 
 		// 其它按钮绘制
-
 		imageAlign_alpha(canvas_main, L"sprites/login.png", 32, 32, WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * EX_LEFT / 2, WINDOW_WID * EX_LEFT / 2);
 		imageAlign_alpha(canvas_main, L"sprites/last_page_disabled.png", 32, 32, WINDOW_WID * EX_LEFT + 10, WINDOW_HEI - 45, 32, 32);
 		imageAlign_alpha(canvas_main, L"sprites/next_page.png", 32, 32, WINDOW_WID * EX_LEFT + 50, WINDOW_HEI - 45, 32, 32);
-
 
 
 		// 按钮控件逻辑
@@ -505,7 +530,7 @@ void home()
 					}
 					case WM_LBUTTONUP:
 					{
-						textAlign(canvas_main, _T("LOGIN"), 36, 0, _T("微软雅黑"), 0, 0, WINDOW_WID, WINDOW_WID); //do somthing
+						textAlign(canvas_main, _T("登录注册系统前端正在开发中..."), 18, 0, _T("微软雅黑"), 0, 0, WINDOW_WID - 30, WINDOW_WID * EX_LEFT + 30, BOTTOM_RIGHT); //do somthing
 
 						canvas_main.SetFillColor(0xCCCCCC);
 						canvas_main.SolidRoundRect(WINDOW_WID * (1 - EX_LEFT * 3 / 4), WINDOW_WID * EX_LEFT / 4, WINDOW_WID * (1 - EX_LEFT / 4), WINDOW_WID * EX_LEFT * 3 / 4, 20, 20);

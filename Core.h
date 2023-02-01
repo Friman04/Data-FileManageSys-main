@@ -1,54 +1,73 @@
 #pragma once
-#include "Configure.h"
+#include "Configuration.h"
 
 
 /*结构体*/
 
+/*
+* @brief 用于存放用户的数据
+* @note 两个value为待开发的值
+*/
 typedef struct
 {
-    char id[16];
-    char pwd[20];
+    char id[16];        ///<-用户名
+    long long uid;      ///<-用户唯一标识
+    char pwd[20];       ///<-密码
     int value1;
     int value2;
-    int sex;
+    int sex;            ///<-性别
+    tm reg_date;        ///<-注册日期
 }user;
 
+/*
+* @brief 文本信息
+*/
 typedef struct Text  ///<-[?]C++20标准中typerdef名称中使用的未命名的类不能声明非静态数据成员、成员枚举或成员类以外的成员。而该结构体中不包含类的实例化，这个bug的解决方式是命名改结构体。
 {
-    LPCTSTR str;
-    int nHeight;
-    int nWidth;
-    LPCTSTR font;
-    COLORREF c;
-    LONG esc = 0;
-    LONG ori = 0;
-    int mode = TRANSPARENT;
+    LPCTSTR str;    ///<-文本内容
+    int nHeight;    ///<-文字高度
+    int nWidth;     ///<-文字宽度
+    LPCTSTR font;   ///<-字体
+    COLORREF c;     ///<-颜色
+    LONG esc = 0;   ///<-字符串书写角度
+    LONG ori = 0;   ///<-每个字符的倾斜角
+    int mode = TRANSPARENT;     ///<-文字绘制模式（默认为透明背景）
 }Text;
 
+/*
+* @brief 数据信息
+*/
 typedef struct
 {
-    char filename[MAX_LEN];
-    tm create_time;
-    tm recent_edited_time;
-    float data[N];
-    float processed_data[N];
-    int count;
-    int col;
-    int row;
-    float mean;
-    float variance;
-    float max;
-    float min;
-    float scale;
-    char status;
-    bool is_valid;
+    char filename[MAX_LEN];     ///<-文件名
+    tm create_time;             ///<-创建时间
+    tm recent_edited_time;      ///<-最近修改时间
+    float data[N];              ///<-数据
+    float processed_data[N];    ///<-处理后的数据
+    int count;                  ///<-数据个数
+    float mean;                 ///<-均值
+    float variance;             ///<-方差
+    float max;                  ///<-最大值
+    float min;                  ///<-最小值
+    float scale;                ///<-极差
+    char status;                ///<-文件状态
+    bool is_valid;              ///<-数据文件是否合法
+    long long uid;              ///<-最后一次修改者的uid
 }dataInfo;
 
+/*
+* @brief 两个int
+* @note 用于存放坐标
+*/
 typedef struct
 {
     int x, y;
 }intPair;
 
+/*
+* @brief 两个intPair
+* @note 用于存放矩形区域
+*/
 typedef struct
 {
     intPair point1;     ///<- 左上角点
@@ -226,4 +245,3 @@ void __textAlign(LPCTSTR str, int x, int y, int width, int height, bool horizont
  * @return                      wchar字符串
 */
 wchar_t* char2wchar(const char* cchar);
-

@@ -72,4 +72,3 @@ private:
 private:
     intPair icon_pos;
 };
-

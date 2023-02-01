@@ -365,7 +365,7 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	textAlign(canvas, L"kernel size: 5", 18, 0, L"微软雅黑", func_btn.point1.x + 90, func_btn.point1.y + 25 + 10, 0, 25, LEFT);
 
 	textAlign(canvas, L"去除异常值--------------", 18, 0, L"等线", func_btn.point1.x, func_btn.point1.y + 25 + 10 + 25 + 10, func_btn.point1.x - func_btn.point2.x, func_btn.point1.y - func_btn.point2.y, TOP_LEFT);
-	textAlign(canvas, L"神经网络拟合------------", 18, 0, L"等线", func_btn.point1.x, func_btn.point1.y + 25 + 10 + 25 + 10 + 25 + 10, func_btn.point1.x - func_btn.point2.x, func_btn.point1.y - func_btn.point2.y, TOP_LEFT);
+	textAlign(canvas, L"回归预测---------------", 18, 0, L"等线", func_btn.point1.x, func_btn.point1.y + 25 + 10 + 25 + 10 + 25 + 10, func_btn.point1.x - func_btn.point2.x, func_btn.point1.y - func_btn.point2.y, TOP_LEFT);
 
 
 
