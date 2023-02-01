@@ -29,6 +29,7 @@ public:
     bool isIn(ExMessage msg);
     bool isLCD(ExMessage msg);
     bool isLCU(ExMessage msg);
+    bool isPressed();
     //void createIconCanvas();
     //void createHoverCanvas();
     //void createPushCanvas();
@@ -39,9 +40,9 @@ public:
 
     //void draw_hover();
     void draw_hover(hiex::Canvas& canvas);
-    void draw_detailed_default(hiex::Canvas& canvas);
-    void draw_detailed_hover(hiex::Canvas& canvas);
-    void draw_detailed_push(hiex::Canvas& canvas);
+    void draw_detailed_default(hiex::Canvas& canvas, bool enable_press);
+    void draw_detailed_hover(hiex::Canvas& canvas, bool enable_press);
+    void draw_detailed_push(hiex::Canvas& canvas, bool enable_press);
 
     //void draw_push();
 
@@ -55,7 +56,9 @@ private:
     int icon_w;
     int icon_h;
     bool isRound = true;
+    bool is_pressed = false;
     int round_radius = 20;
+    int line_thickness = 4;
     Text text;
     LPCTSTR icon_filename;
     //hiex::ImageBlock icon;

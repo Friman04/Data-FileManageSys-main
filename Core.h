@@ -115,14 +115,24 @@ float variance(float a[], int n);
 
 
 /*数据分析方法*/
+
 /**
- * @brief 均值滤波
+ * @brief 均值滤波1(向右偏移)
  * @param[in] destination       一维目标数组
  * @param[in] source            一维源数组
  * @param[in] n 	            数组长度
  * @param[in] kernel_size       窗口大小（必须为奇数）
 */
-float mean_filter(float destination[], float a[], int n, int kernel_size);
+int mean_filter1(float destination[], float a[], int n, int kernel_size);
+
+/**
+ * @brief 均值滤波2（向左偏移）
+ * @param[in] destination       一维目标数组
+ * @param[in] source            一维源数组
+ * @param[in] n 	            数组长度
+ * @param[in] kernel_size       窗口大小（必须为奇数）
+*/
+int mean_filter2(float destination[], float a[], int n, int kernel_size);
 
 
 /*对齐绘制方法*/

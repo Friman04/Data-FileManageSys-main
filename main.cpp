@@ -5,7 +5,7 @@
  * @site		https://github.com/Friman04/Data-FileManageSys-main
  * @date		2023.01.12
  * @envir		Windows 11 dev_Build 25272.rs_prerelease.221216-1237 | Visual Studio 2022 | EasyX_20220901 | HiEasyX Ver 0.3.0
- * @version     0.1Beta4b
+ * @version     0.1Beta5a
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
@@ -40,7 +40,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define _SYS_VER_STR_	L"Ver 0.1Beta4b"
+#define _SYS_VER_STR_	L"Ver 0.1Beta5a"
 
 #include "my_Button.h"
 #include "FileBrowser.h"
@@ -663,34 +663,48 @@ void home()
 			}
 			else if (file_browser.IsInFuncArea(m_msg))
 			{
-
-				if (file_browser.filters[1].isIn(m_msg))
+				int btn_index = file_browser.InWhichFuncBtn(m_msg);
+				if (btn_index == -1);
+				else if (file_browser.filters[btn_index].isIn(m_msg))
 				{
-					file_browser.filters[1].draw_detailed_hover(canvas_main);
-					file_browser.filters[1].draw_default_txt(canvas_main);
+					file_browser.filters[btn_index].draw_detailed_hover(canvas_main, true);
+					file_browser.filters[btn_index].draw_default_txt(canvas_main);
 					REDRAW_WINDOW();
-					if (file_browser.filters[1].isLCD(m_msg))
+					if (file_browser.filters[btn_index].isLCD(m_msg))
 					{
-						file_browser.filters[1].draw_detailed_push(canvas_main);
-						file_browser.filters[1].draw_default_txt(canvas_main);
+						file_browser.filters[btn_index].draw_detailed_push(canvas_main, true);
+						file_browser.filters[btn_index].draw_default_txt(canvas_main);
 						REDRAW_WINDOW();
 					}
-					if (file_browser.filters[1].isLCU(m_msg))
+					if (file_browser.filters[btn_index].isLCU(m_msg))
 					{
-						file_browser.FilterData();
+						file_browser.FilterData(btn_index);
+						file_browser.DrawDataChart(canvas_main, file_browser.info.data, BLUE);
+						file_browser.ClearChartDrawingZone(canvas_main);
 						file_browser.DrawDataChart(canvas_main, file_browser.info.processed_data, RED);
+						REDRAW_WINDOW();
 					}
 				}
 				else
 				{
-					file_browser.filters[1].draw_detailed_default(canvas_main);
-					file_browser.filters[1].draw_default_txt(canvas_main);
-					REDRAW_WINDOW();
+					if (file_browser.filters[btn_index].isPressed())
+					{
+						file_browser.filters[btn_index].draw_detailed_hover(canvas_main, true);
+						file_browser.filters[btn_index].draw_default_txt(canvas_main);
+						REDRAW_WINDOW();
+					}
+					else
+					{
+						file_browser.filters[btn_index].draw_detailed_default(canvas_main, true);
+						file_browser.filters[btn_index].draw_default_txt(canvas_main);
+						REDRAW_WINDOW();
+					}
 				}
 			}
 
 
 			else if (
+			// FileBrowser
 			(m_msg.x > WINDOW_WID * EX_LEFT - out_r &&	// 文件浏览器左端
 			m_msg.x < WINDOW_WID * EX_LEFT) ||
 			(m_msg.y > WINDOW_WID * EX_LEFT - out_r &&	// 文件浏览器上端
@@ -698,7 +712,7 @@ void home()
 			(m_msg.x > WINDOW_WID * MID_LEFT &&			// 文件浏览器右端
 			m_msg.x < WINDOW_WID * MID_LEFT + out_r) ||
 
-
+			// 登录按钮
 			(m_msg.x > WINDOW_WID * (1 - EX_LEFT * 3 / 4) - out_r &&
 			m_msg.x < WINDOW_WID * (1 - EX_LEFT * 3 / 4)) ||
 			(m_msg.x > WINDOW_WID * (1 - EX_LEFT / 4) &&

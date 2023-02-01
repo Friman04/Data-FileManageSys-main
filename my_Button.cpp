@@ -98,7 +98,10 @@ bool my_Button::isLCD(ExMessage msg)
     if (isIn(msg))
     {
         if (msg.message == WM_LBUTTONDOWN)
+        {
+            is_pressed = (!is_pressed);
             return true;
+        }
     }
     return false;
 }
@@ -111,6 +114,11 @@ bool my_Button::isLCU(ExMessage msg)
             return true;
     }
     return false;
+}
+
+bool my_Button::isPressed()
+{
+    return is_pressed;
 }
 
 //void my_Button::createIconCanvas()
@@ -177,26 +185,55 @@ void my_Button::draw_hover(hiex::Canvas& canvas)
 
 }
 
-void my_Button::draw_detailed_default(hiex::Canvas& canvas)
+void my_Button::draw_detailed_default(hiex::Canvas& canvas, bool enable_press)
 {
     canvas.SetLineStyle(PS_SOLID);
-    canvas.SetLineThickness(1);
+    if (enable_press)
+    {
+        if (is_pressed)
+        {
+            canvas.SetLineThickness(line_thickness);
+        }
+        else
+            canvas.SetLineThickness(1);
+    }
+    else
+        canvas.SetLineThickness(1);
     canvas.FillRoundRect(x, y, x + w, y + h, 10, 10, true, BLACK, WHITE);
 }
 
-void my_Button::draw_detailed_hover(hiex::Canvas& canvas)
+void my_Button::draw_detailed_hover(hiex::Canvas& canvas, bool enable_press)
 {
-    canvas.SetLineStyle(PS_SOLID);
-    canvas.SetLineThickness(1);
+    canvas.SetLineStyle(PS_SOLID);    if (enable_press)
+    {
+        if (is_pressed)
+        {
+            canvas.SetLineThickness(line_thickness);
+        }
+        else
+            canvas.SetLineThickness(1);
+    }
+    else
+        canvas.SetLineThickness(1);
     canvas.FillRoundRect(x, y, x + w, y + h, 10, 10, true, BLACK, hover_c);
 }
 
-void my_Button::draw_detailed_push(hiex::Canvas& canvas)
+void my_Button::draw_detailed_push(hiex::Canvas& canvas, bool enable_press)
 {
-    canvas.SetLineStyle(PS_SOLID);
-    canvas.SetLineThickness(1);
+    canvas.SetLineStyle(PS_SOLID);    if (enable_press)
+    {
+        if (is_pressed)
+        {
+            canvas.SetLineThickness(line_thickness);
+        }
+        else
+            canvas.SetLineThickness(1);
+    }
+    else
+        canvas.SetLineThickness(1);
     canvas.FillRoundRect(x, y, x + w, y + h, 10, 10, true, BLACK, push_c);
 }
+
 
 //void my_Button::draw_push()
 //{

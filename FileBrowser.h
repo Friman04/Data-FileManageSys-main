@@ -24,14 +24,16 @@ public:
 	void FlushDataIndex();
 
 	void ClearDataDrawingZone(hiex::Canvas& canvas);
+	void ClearChartDrawingZone(hiex::Canvas& canvas);
 	void LoadDataFileName(const char* filename);
 	void RenderFileBrowser(hiex::Canvas& canvas);
 	int InWhichButton(ExMessage msg);
+	int InWhichFuncBtn(ExMessage msg);
 
 	void LoadData(ExMessage msg);
 	void DrawDataInfo(hiex::Canvas& canvas);
 
-	void FilterData();
+	void FilterData(int btn);
 	void DrawDataChart(hiex::Canvas& canvas, float data[], COLORREF c);
 	~FileBrowser();
 
@@ -60,10 +62,10 @@ private:
 
 
 public:
-	my_Button file_buttons[row_num];
-	my_Button filters[1];
-	my_Button func_btns[1];
-	dataInfo info;																					///<-数据信息
-
+	my_Button file_buttons[row_num];			///<-文件浏览器每页的按钮
+	my_Button filters[2];						///<-滤波按钮
+	my_Button func_btns[1][2];					///<-所有分析功能按钮
+	dataInfo info;								///<-数据信息
+	int (*pfunc[2])(float*, float*, int, int) = {mean_filter1, mean_filter2};	///<-数据分析函数指针数组
 };
 

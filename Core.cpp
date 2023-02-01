@@ -62,7 +62,7 @@ float variance(float a[], int n) //数据方差
     return sum / n;
 }
 
-float mean_filter(float destination[], float a[], int n, int kernel_size)
+int mean_filter1(float destination[], float a[], int n, int kernel_size)
 {
     if (kernel_size % 2 == 0 || kernel_size > n)
         return -1;
@@ -83,6 +83,45 @@ float mean_filter(float destination[], float a[], int n, int kernel_size)
             if (window.size() >= kernel_size)
                 window.pop();
         }
+    }
+}
+
+int mean_filter2(float destination[], float a[], int n, int kernel_size)
+{
+    if (kernel_size % 2 == 0 || kernel_size > n)
+        return -1;
+    else
+    {
+        std::queue <float>window;
+        window.push(a[0]);
+        destination[0] = a[0];
+        for (int i = 1; i < n; i++)     // 遍历整个数据
+        {
+            if (i <= (kernel_size - 1) / 2)
+            {
+                window.push(a[window.size()]);
+                window.push(a[window.size()]);
+            }
+            else if (i >= n - (kernel_size - 1 / 2))
+            {
+                window.pop();
+            }
+            else
+            {
+                window.push(a[i + (kernel_size - 1 / 2)]);
+                window.pop();
+            }
+
+            float sum = 0;
+            for (int j = 0; j < window.size(); j++)     // 遍历滑窗
+            {   //* 疏忽了，忘记C++里面没有遍历queue的方法，这个遍历的方法也太蠢了，一点都不优雅
+                sum += window.front();
+                window.push(window.front());
+                window.pop();
+            }
+            destination[i] = sum / window.size();
+        }
+        destination[n - 1] = a[n - 1];
     }
 }
 

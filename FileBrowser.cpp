@@ -50,6 +50,11 @@ void FileBrowser::ClearDataDrawingZone(hiex::Canvas& canvas)
 	canvas.SolidRectangle(WINDOW_WID * MID_LEFT + 2, WINDOW_WID * EX_LEFT, WINDOW_WID, WINDOW_HEI - 30, true, 0xDDDDDD);	// 30为底部安全边距
 }
 
+void FileBrowser::ClearChartDrawingZone(hiex::Canvas& canvas)
+{	// 没错，用图片覆盖来降低折线图的透明度，太蠢了
+	canvas.Load_Image_Alpha(L"sprites/drawing_bg.png", line_chart.point1.x, line_chart.point1.y, false, line_chart.point2.x - line_chart.point1.x, line_chart.point2.y - line_chart.point1.y, 0xAAU);
+}
+
 bool FileBrowser::IsHomePage()
 {
 	if (data_page == 0)
@@ -166,6 +171,18 @@ int FileBrowser::InWhichButton(ExMessage msg)
 	return -1;
 }
 
+int FileBrowser::InWhichFuncBtn(ExMessage msg)
+{
+	for (int i = 0; i < 2; i++)
+	{
+		if (filters[i].isIn(msg))
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
 void FileBrowser::LoadData(ExMessage msg)
 {
 	char filename[MAX_LEN];
@@ -208,7 +225,7 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	const float txt_line_space = 1.25;	// 行间距（倍数）
 	SetLineChartDrawingArea(WINDOW_WID * MID_LEFT + 350, WINDOW_WID * EX_LEFT + 100, WINDOW_WID - 100, WINDOW_HEI - 150);
 	SetDataInfoDrawingArea(WINDOW_WID * MID_LEFT + module_margin, WINDOW_WID * EX_LEFT + 100 - margin - extension, WINDOW_WID * MID_LEFT + 250, WINDOW_WID * EX_LEFT + 350);
-	SetFuncBtnDrawingArea(WINDOW_WID * MID_LEFT + module_margin, WINDOW_WID * EX_LEFT + 100 + module_margin, WINDOW_WID * MID_LEFT + 250, WINDOW_HEI - module_margin);
+	SetFuncBtnDrawingArea(WINDOW_WID * MID_LEFT + module_margin, WINDOW_WID * EX_LEFT + 350 + module_margin, WINDOW_WID * MID_LEFT + 250, WINDOW_HEI - module_margin);
 
 	char mean[DATA_WIDTH];
 	char mean_suffix[DATA_WIDTH + 10] = "均值：\n";
@@ -330,24 +347,33 @@ void FileBrowser::DrawDataInfo(hiex::Canvas& canvas)
 	// 绘制折线图
 	DrawDataChart(canvas, info.data, BLUE);
 
-	// 均值
-	canvas.SetLineColor(YELLOW);
-	canvas.SetLineStyle(PS_DASH | PS_JOIN_BEVEL, 3);
-	canvas.Line(x1, y1 + (info.max - info.mean) * hratio, x2, y1 + (info.max - info.mean) * hratio);
+	// 按钮区域
+	textAlign(canvas, L"滤波平滑---------------", 18, 0, L"等线", func_btn.point1.x, func_btn.point1.y - 25, func_btn.point1.x - func_btn.point2.x, func_btn.point1.y - func_btn.point2.y, TOP_LEFT);
 
-	// 按钮
-	my_Button mean_filter_btn(WINDOW_WID * MID_LEFT + 50, 500, 100, 30);
-	mean_filter_btn.draw_detailed_default(canvas);
-	mean_filter_btn.setText(L"均值滤波", 23, 0, L"微软雅黑", BLACK);
-	mean_filter_btn.draw_default_txt(canvas);
+	my_Button mean_filter0_btn(WINDOW_WID * MID_LEFT + module_margin, func_btn.point1.y, 80, 25);
+	mean_filter0_btn.draw_detailed_default(canvas, true);
+	mean_filter0_btn.setText(L"均值滤波1", 20, 0, L"微软雅黑", BLACK);
+	mean_filter0_btn.draw_default_txt(canvas);
+	filters[0] = mean_filter0_btn;
+	textAlign(canvas, L"kernel size: 5", 18, 0, L"微软雅黑", func_btn.point1.x + 90, func_btn.point1.y, 0, 25, LEFT);
 
-	filters[1] = mean_filter_btn;
+	my_Button mean_filter1_btn(WINDOW_WID * MID_LEFT + module_margin, func_btn.point1.y + 25 + 10, 80, 25);
+	mean_filter1_btn.draw_detailed_default(canvas, true);
+	mean_filter1_btn.setText(L"均值滤波2", 20, 0, L"微软雅黑", BLACK);
+	mean_filter1_btn.draw_default_txt(canvas);
+	filters[1] = mean_filter1_btn;
+	textAlign(canvas, L"kernel size: 5", 18, 0, L"微软雅黑", func_btn.point1.x + 90, func_btn.point1.y + 25 + 10, 0, 25, LEFT);
+
+	textAlign(canvas, L"去除异常值--------------", 18, 0, L"等线", func_btn.point1.x, func_btn.point1.y + 25 + 10 + 25 + 10, func_btn.point1.x - func_btn.point2.x, func_btn.point1.y - func_btn.point2.y, TOP_LEFT);
+	textAlign(canvas, L"神经网络拟合------------", 18, 0, L"等线", func_btn.point1.x, func_btn.point1.y + 25 + 10 + 25 + 10 + 25 + 10, func_btn.point1.x - func_btn.point2.x, func_btn.point1.y - func_btn.point2.y, TOP_LEFT);
+
+
 
 }
 
-void FileBrowser::FilterData()
+void FileBrowser::FilterData(int btn)
 {
-	mean_filter(info.processed_data, info.data, info.count, 5);
+	pfunc[btn](info.processed_data, info.data, info.count, 15);
 }
 
 void FileBrowser::DrawDataChart(hiex::Canvas& canvas, float data[], COLORREF c)
@@ -368,6 +394,11 @@ void FileBrowser::DrawDataChart(hiex::Canvas& canvas, float data[], COLORREF c)
 		x0 += xval;
 	}
 
+
+	// 均值
+	canvas.SetLineColor(YELLOW);
+	canvas.SetLineStyle(PS_DASH | PS_JOIN_BEVEL, 3);
+	canvas.Line(x1, y1 + (info.max - info.mean) * hratio, x2, y1 + (info.max - info.mean) * hratio);
 }
 
 FileBrowser::~FileBrowser()
