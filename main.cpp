@@ -8,7 +8,7 @@
  * @hardware	CPU:	12th Gen Intel(R) Core(TM) i7-12700H   2.30 GHz
  *				GPU:	NVIDIA GeForce RTX 3060 Laptop GPU GDDR6 @ 6GB (192 bit)
  *				
- * @version     0.1Beta5b
+ * @version     0.1Beta5b-release20230201
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
@@ -46,7 +46,7 @@
 	│   ├── up_arrow.png
 	│   └── white.png
 	├── VerChange.log				// 更新日志（不再维护）
-	├── 工业数据分析与文件信息管理系统0.1Beta5a-release20230201.exe		// 生成的程序
+	├── 工业数据分析与文件信息管理系统0.1Beta5b-release20230201.exe		// 生成的程序
 	└── ...
  * 
  * @note		目前已知存在的bug（更多已修复bug可移步更新日志）
@@ -66,7 +66,7 @@
  *******************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
-#define _SYS_VER_STR_	L"Ver 0.1Beta5b"
+#define _SYS_VER_STR_	L"Ver 0.1Beta5b-release20230201"
 
 #include "my_Button.h"
 #include "FileBrowser.h"
