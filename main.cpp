@@ -8,7 +8,11 @@
  * @hardware	CPU:	12th Gen Intel(R) Core(TM) i7-12700H   2.30 GHz
  *				GPU:	NVIDIA GeForce RTX 3060 Laptop GPU GDDR6 @ 6GB (192 bit)
  *				
+<<<<<<< Updated upstream
  * @version     0.1Beta5b-release20230201
+=======
+ * @version     0.1Beta6b
+>>>>>>> Stashed changes
  *
  * @note		本项目使用了基于 EasyX 的扩展 HiEasyX，请确保环境中安装了 EasyX
  *				程序只能在 Windows 环境下运行，应该在 Windows 10/11 和 Visual Studio 下编译程序，暂不支持 MinGW 编译器，其它环境未测试，不保证程序能正常运行
@@ -62,11 +66,14 @@
  * 
  * @develop		1.登录系统
  * @develop		2.切换按钮
- * @develop		3.去除离群值
  *******************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
+<<<<<<< Updated upstream
 #define _SYS_VER_STR_	L"Ver 0.1Beta5b-release20230201"
+=======
+#define _SYS_VER_STR_	L"Ver 0.1Beta6b"
+>>>>>>> Stashed changes
 
 #include "my_Button.h"
 #include "FileBrowser.h"
@@ -76,7 +83,6 @@
  //
 
 char token; // 未使用
-
 
 
 /*创建储存用户账号密码的文件*/

@@ -1,4 +1,5 @@
 ﻿  main.cpp
+<<<<<<< Updated upstream
 C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.h(46,91): warning C4244: “初始化”: 从“double”转换到“const unsigned int”，可能丢失数据
 C:\Users\Friman\Downloads\Data-FileManageSys-main\FileBrowser.h(48,70): warning C4244: “初始化”: 从“double”转换到“const int”，可能丢失数据
 C:\Users\Friman\Downloads\Data-FileManageSys-main\main.cpp(85,8): warning C4101: “fp”: 未引用的局部变量
@@ -113,3 +114,119 @@ C:\Users\Friman\Downloads\Data-FileManageSys-main\main.cpp(783,100): warning C42
 C:\Users\Friman\Downloads\Data-FileManageSys-main\main.cpp(817,10): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“int”
 C:\Users\Friman\Downloads\Data-FileManageSys-main\main.cpp(817,10): warning C4313: "printf": 格式字符串中的 "%s" 与类型为 "int" 的参数 1 冲突
   management system.vcxproj -> C:\Users\Friman\Downloads\Data-FileManageSys-main\x64\Debug\management system.exe
+=======
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\FileBrowser.h(46,91): warning C4244: “初始化”: 从“double”转换到“const unsigned int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\FileBrowser.h(48,70): warning C4244: “初始化”: 从“double”转换到“const int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(83,8): warning C4101: “fp”: 未引用的局部变量
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(467,78): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(467,56): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(467,33): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(471,49): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(473,61): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(473,36): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(476,119): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(476,93): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(479,160): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(479,130): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(479,107): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(480,86): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(484,172): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(484,146): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(484,120): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(484,74): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(485,97): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(486,88): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(500,140): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(500,80): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(524,153): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(524,107): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(524,91): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(524,45): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(525,176): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(525,150): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(525,124): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(525,78): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(531,151): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(531,124): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(534,153): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(534,107): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(534,91): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(534,45): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(535,176): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(535,150): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(535,124): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(535,78): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(543,153): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(543,107): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(543,91): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(543,45): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(544,176): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(544,150): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(544,124): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(544,78): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(558,99): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(558,55): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(559,92): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(565,87): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(565,75): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(573,101): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(573,56): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(574,102): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(579,101): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(579,56): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(581,100): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(581,56): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(582,93): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(587,144): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(587,84): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(590,99): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(590,55): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(591,92): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(599,99): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(599,55): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(600,92): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(615,99): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(615,55): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(616,92): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(622,87): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(622,75): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(630,101): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(630,56): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(631,102): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(636,101): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(636,56): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(638,100): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(638,56): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(639,93): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(643,144): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(643,84): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(646,99): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(646,55): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(647,92): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(655,99): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(655,55): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(656,92): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(752,151): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(752,105): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(752,89): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(752,43): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(753,174): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(753,148): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(753,122): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(753,76): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(759,98): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(759,54): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(760,91): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(765,98): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(765,54): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(766,100): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(774,98): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(774,54): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(775,91): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(780,98): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(780,54): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(781,100): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(815,10): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“int”
+C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\main.cpp(815,10): warning C4313: "printf": 格式字符串中的 "%s" 与类型为 "int" 的参数 1 冲突
+  management system.vcxproj -> C:\Users\Friman\Desktop\期末大作业\程序设计基础A课程设计--2022秋--发布\电创2022-吴玮彤-课程设计\Data-FileManageSys-main\x64\Debug\management system.exe
+>>>>>>> Stashed changes
